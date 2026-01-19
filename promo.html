@@ -1,0 +1,2007 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="दूध वाला - गांव के दूध विक्रेताओं के लिए सबसे आसान ऐप। ग्राहकों का हिसाब, बिल, भुगतान सब एक जगह।">
+    <meta name="keywords" content="दूध वाला, milk app, dairy app, दूध का हिसाब, milk collection app">
+    <meta name="author" content="Dudh Wala">
+    <meta name="theme-color" content="#4A90A4">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="दूध वाला - Milk Collection Made Easy">
+    <meta property="og:description" content="गांव के दूध विक्रेताओं के लिए सबसे आसान ऐप">
+    <meta property="og:image" content="og-image.png">
+    <meta property="og:type" content="website">
+    
+    <title>दूध वाला - Milk Collection Made Easy | Best Dairy App</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ============================================
+           ROOT VARIABLES
+           ============================================ */
+        :root {
+            --primary: #4A90A4;
+            --primary-dark: #3A7A8E;
+            --primary-light: #6BB5C9;
+            --secondary: #7EC8A3;
+            --accent: #F4A261;
+            --danger: #E07A5F;
+            --bg-light: #E4EfE9;
+            --bg-dark: #1a1a2e;
+            --text-dark: #2D3748;
+            --text-light: #718096;
+            --white: #FFFFFF;
+            --gradient-1: linear-gradient(135deg, #4A90A4 0%, #7EC8A3 100%);
+            --gradient-2: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-3: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --shadow-soft: 0 10px 40px rgba(0,0,0,0.1);
+            --shadow-strong: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        /* ============================================
+           RESET & BASE
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            background: var(--white);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ============================================
+           ANIMATIONS
+           ============================================ */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(74, 144, 164, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(74, 144, 164, 0.6); }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============================================
+           NAVBAR
+           ============================================ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-soft);
+            padding: 10px 0;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .navbar.scrolled .navbar-brand {
+            color: var(--primary);
+        }
+
+        .navbar-brand .logo-icon {
+            font-size: 32px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.9);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .navbar.scrolled .nav-links a {
+            color: var(--text-dark);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--white);
+            color: var(--primary);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled .nav-cta {
+            background: var(--gradient-1);
+            color: var(--white);
+        }
+
+        .nav-cta:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            color: var(--white);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .navbar.scrolled .mobile-menu-btn {
+            color: var(--primary);
+        }
+
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        .hero {
+            min-height: 100vh;
+            background: var(--gradient-1);
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .hero-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .hero-shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+
+        .hero-shape-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--white);
+            top: -100px;
+            right: -100px;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero-shape-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--accent);
+            bottom: -50px;
+            left: -50px;
+            animation: float 6s ease-in-out infinite reverse;
+        }
+
+        .hero-shape-3 {
+            width: 200px;
+            height: 200px;
+            background: var(--white);
+            top: 50%;
+            left: 30%;
+            animation: float 10s ease-in-out infinite;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            color: var(--white);
+            animation: slideIn 1s ease;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-badge i {
+            color: var(--accent);
+            margin-right: 8px;
+        }
+
+        .hero-title {
+            font-size: 56px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-title span {
+            color: var(--accent);
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--white);
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--primary);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .hero-image {
+            position: relative;
+            animation: slideUp 1s ease 0.3s both;
+        }
+
+        .phone-mockup {
+            position: relative;
+            max-width: 350px;
+            margin: 0 auto;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .phone-frame {
+            background: #1a1a1a;
+            border-radius: 40px;
+            padding: 15px;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.3);
+        }
+
+        .phone-screen {
+            background: var(--bg-light);
+            border-radius: 30px;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .phone-screen .app-preview {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, var(--bg-light) 0%, #d4e4de 100%);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .preview-logo {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .preview-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .preview-card {
+            background: var(--white);
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .preview-card-icon {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .preview-card-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .preview-card-label {
+            font-size: 10px;
+            color: var(--text-light);
+        }
+
+        .preview-btn {
+            background: var(--gradient-1);
+            color: var(--white);
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            font-weight: 600;
+            margin-top: auto;
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .floating-card {
+            position: absolute;
+            background: var(--white);
+            padding: 15px 20px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .floating-card-1 {
+            top: 10%;
+            left: -30px;
+            animation-delay: 0s;
+        }
+
+        .floating-card-2 {
+            bottom: 20%;
+            right: -30px;
+            animation-delay: 1s;
+        }
+
+        .floating-card-3 {
+            top: 50%;
+            left: -50px;
+            animation-delay: 2s;
+        }
+
+        .floating-card .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .floating-card .icon.green {
+            background: rgba(126, 200, 163, 0.2);
+            color: var(--secondary);
+        }
+
+        .floating-card .icon.blue {
+            background: rgba(74, 144, 164, 0.2);
+            color: var(--primary);
+        }
+
+        .floating-card .icon.orange {
+            background: rgba(244, 162, 97, 0.2);
+            color: var(--accent);
+        }
+
+        .floating-card .info h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .floating-card .info p {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        /* ============================================
+           FEATURES SECTION
+           ============================================ */
+        .features {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: rgba(74, 144, 164, 0.1);
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--bg-light);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: var(--gradient-1);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .feature-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .feature-desc {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           HOW IT WORKS
+           ============================================ */
+        .how-it-works {
+            padding: 100px 0;
+            background: linear-gradient(180deg, var(--bg-light) 0%, var(--white) 100%);
+        }
+
+        .steps-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            position: relative;
+            margin-top: 60px;
+        }
+
+        .steps-line {
+            position: absolute;
+            top: 60px;
+            left: 15%;
+            right: 15%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        .step-item {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            padding: 0 20px;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--white);
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0 auto 25px;
+            transition: all 0.3s ease;
+        }
+
+        .step-item:hover .step-number {
+            background: var(--gradient-1);
+            color: var(--white);
+            border-color: transparent;
+            transform: scale(1.1);
+        }
+
+        .step-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .step-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .step-desc {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           BENEFITS SECTION
+           ============================================ */
+        .benefits {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .benefits .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .benefits-image {
+            position: relative;
+        }
+
+        .benefits-img-main {
+            border-radius: 30px;
+            box-shadow: var(--shadow-strong);
+        }
+
+        .benefits-img-overlay {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            background: var(--gradient-1);
+            padding: 30px;
+            border-radius: 20px;
+            color: var(--white);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .benefits-img-overlay h3 {
+            font-size: 36px;
+            font-weight: 700;
+        }
+
+        .benefits-img-overlay p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .benefits-content h2 {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        .benefits-content > p {
+            font-size: 16px;
+            color: var(--text-light);
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+
+        .benefits-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .benefit-item {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .benefit-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(126, 200, 163, 0.15);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--secondary);
+            flex-shrink: 0;
+        }
+
+        .benefit-text h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .benefit-text p {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        /* ============================================
+           TESTIMONIALS
+           ============================================ */
+        .testimonials {
+            padding: 100px 0;
+            background: var(--gradient-1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .testimonials .section-header {
+            color: var(--white);
+        }
+
+        .testimonials .section-badge {
+            background: rgba(255,255,255,0.2);
+            color: var(--white);
+        }
+
+        .testimonials .section-title {
+            color: var(--white);
+        }
+
+        .testimonials .section-subtitle {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 35px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        .testimonial-quote {
+            font-size: 40px;
+            color: var(--primary);
+            opacity: 0.3;
+            line-height: 1;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-text {
+            font-size: 15px;
+            color: var(--text-dark);
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .testimonial-avatar {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .testimonial-info h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .testimonial-info p {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        .testimonial-rating {
+            margin-top: 5px;
+            color: var(--accent);
+            font-size: 14px;
+        }
+
+        /* ============================================
+           PRICING / CTA SECTION
+           ============================================ */
+        .cta-section {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .cta-box {
+            background: var(--bg-light);
+            border-radius: 30px;
+            padding: 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(74, 144, 164, 0.1) 0%, transparent 50%);
+            animation: rotate 20s linear infinite;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        .cta-title {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .cta-subtitle {
+            font-size: 18px;
+            color: var(--text-light);
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-price {
+            margin-bottom: 30px;
+        }
+
+        .cta-price .free-badge {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--white);
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .cta-price p {
+            margin-top: 10px;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-cta {
+            background: var(--gradient-1);
+            color: var(--white);
+            padding: 18px 40px;
+            font-size: 18px;
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(74, 144, 164, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 16px 38px;
+            font-size: 18px;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* ============================================
+           FAQ SECTION
+           ============================================ */
+        .faq-section {
+            padding: 100px 0;
+            background: linear-gradient(180deg, var(--white) 0%, var(--bg-light) 100%);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--white);
+            border-radius: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(74, 144, 164, 0.05);
+        }
+
+        .faq-question h4 {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .faq-question i {
+            color: var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+        }
+
+        .faq-answer p {
+            padding: 0 30px 25px;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background: var(--bg-dark);
+            color: var(--white);
+            padding: 80px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-brand .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-brand .logo span {
+            font-size: 36px;
+        }
+
+        .footer-brand p {
+            color: rgba(255,255,255,0.7);
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-links h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        .footer-links ul {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            color: rgba(255,255,255,0.6);
+            font-size: 14px;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-bottom-links a {
+            color: rgba(255,255,255,0.6);
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--primary);
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 992px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-title {
+                font-size: 42px;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
+            .phone-mockup {
+                max-width: 280px;
+            }
+
+            .floating-elements {
+                display: none;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .benefits .container {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-image {
+                order: -1;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps-container {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .steps-line {
+                display: none;
+            }
+
+            .cta-box {
+                padding: 50px 30px;
+            }
+
+            .cta-title {
+                font-size: 28px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-social {
+                justify-content: center;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+        }
+
+        .navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.logo-icon {
+    width: 100px;      /* adjust size */
+    height: 100px;
+    object-fit: contain;
+}
+.logo-icon {
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+}
+
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+         NAVBAR
+         ============================================ -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#" class="navbar-brand">
+    <img src="assest/logo header.png" alt="दूध वाला Logo" class="logo-icon">
+    <span>दूध वाला</span>
+</a>
+
+            <div class="nav-links">
+                <a href="#features">विशेषताएं</a>
+                <a href="#how-it-works">कैसे काम करे</a>
+                <a href="#benefits">फायदे</a>
+                <a href="#testimonials">रिव्यू</a>
+                <a href="#faq">FAQ</a>
+                <a href="https://t.me/myapssabhi/2" class="nav-cta">ऐप खोलें</a>
+            </div>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ============================================
+         HERO SECTION
+         ============================================ -->
+    <section class="hero" id="home">
+        <div class="hero-shapes">
+            <div class="hero-shape hero-shape-1"></div>
+            <div class="hero-shape hero-shape-2"></div>
+            <div class="hero-shape hero-shape-3"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-star"></i>
+                    #1 Milk Collection App for Villages
+                </div>
+                <h1 class="hero-title">
+                    दूध का हिसाब <span>आसान</span> बनाएं
+                </h1>
+                <p class="hero-subtitle">
+                    गांव के दूध विक्रेताओं के लिए सबसे आसान ऐप। 
+                    ग्राहकों का हिसाब, बिल, भुगतान - सब कुछ एक जगह। 
+                    ऑफलाइन भी काम करता है!
+                </p>
+                <div class="hero-buttons">
+                    <a href="index.html" class="btn btn-primary">
+                        <i class="fas fa-rocket"></i>
+                        अभी शुरू करें
+                    </a>
+                    <a href="#how-it-works" class="btn btn-secondary">
+                        <i class="fas fa-play-circle"></i>
+                        देखें कैसे
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">10K+</span>
+                        <span class="stat-label">Users</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">50L+</span>
+                        <span class="stat-label">Entries</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">4.8⭐</span>
+                        <span class="stat-label">Rating</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="phone-mockup">
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="app-preview">
+                                <div class="preview-header">
+                                    <span class="preview-logo">🥛 दूध वाला</span>
+                                    <span>🔄</span>
+                                </div>
+                                <div class="preview-cards">
+                                    <div class="preview-card">
+                                        <div class="preview-card-icon">☀️</div>
+                                        <div class="preview-card-value">45.5 kg</div>
+                                        <div class="preview-card-label">सुबह</div>
+                                    </div>
+                                    <div class="preview-card">
+                                        <div class="preview-card-icon">🌙</div>
+                                        <div class="preview-card-value">38.2 kg</div>
+                                        <div class="preview-card-label">शाम</div>
+                                    </div>
+                                    <div class="preview-card">
+                                        <div class="preview-card-icon">💰</div>
+                                        <div class="preview-card-value">₹6,024</div>
+                                        <div class="preview-card-label">आज</div>
+                                    </div>
+                                    <div class="preview-card">
+                                        <div class="preview-card-icon">👥</div>
+                                        <div class="preview-card-value">48</div>
+                                        <div class="preview-card-label">ग्राहक</div>
+                                    </div>
+                                </div>
+                                <div class="preview-btn">
+                                    ➕ त्वरित एंट्री
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="floating-elements">
+                    <div class="floating-card floating-card-1">
+                        <div class="icon green">✓</div>
+                        <div class="info">
+                            <h4>एंट्री सेव!</h4>
+                            <p>3.5 kg • ₹252</p>
+                        </div>
+                    </div>
+                    <div class="floating-card floating-card-2">
+                        <div class="icon blue">📊</div>
+                        <div class="info">
+                            <h4>आज का कुल</h4>
+                            <p>83.7 kg</p>
+                        </div>
+                    </div>
+                    <div class="floating-card floating-card-3">
+                        <div class="icon orange">💵</div>
+                        <div class="info">
+                            <h4>भुगतान मिला</h4>
+                            <p>₹5,000</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FEATURES SECTION
+         ============================================ -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">✨ विशेषताएं</span>
+                <h2 class="section-title">सब कुछ एक जगह</h2>
+                <p class="section-subtitle">
+                    दूध वाला ऐप में वो सब है जो एक दूध विक्रेता को चाहिए
+                </p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">📝</div>
+                    <h3 class="feature-title">आसान एंट्री</h3>
+                    <p class="feature-desc">
+                        नंबरपैड से 2 सेकंड में एंट्री करें। 
+                        पाव (¼, ½, ¾) के शॉर्टकट बटन।
+                    </p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">👥</div>
+                    <h3 class="feature-title">ग्राहक प्रबंधन</h3>
+                    <p class="feature-desc">
+                        असीमित ग्राहक जोड़ें। हर ग्राहक की अलग दर रखें।
+                        फोटो और नोट्स भी।
+                    </p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">🧾</div>
+                    <h3 class="feature-title">ऑटो बिल</h3>
+                    <p class="feature-desc">
+                        महीने का बिल अपने-आप बने। 
+                        WhatsApp पर तुरंत भेजें।
+                    </p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">💵</div>
+                    <h3 class="feature-title">भुगतान ट्रैक</h3>
+                    <p class="feature-desc">
+                        कौन कितना बकाया है? सब एक नज़र में। 
+                        Cash, UPI, Bank सब रिकॉर्ड।
+                    </p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">रिपोर्ट</h3>
+                    <p class="feature-desc">
+                        दैनिक, मासिक, वार्षिक रिपोर्ट। 
+                        गाय/भैंस अलग-अलग देखें।
+                    </p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">📴</div>
+                    <h3 class="feature-title">ऑफलाइन काम</h3>
+                    <p class="feature-desc">
+                        इंटरनेट नहीं? कोई बात नहीं! 
+                        सब कुछ ऑफलाइन काम करता है।
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         HOW IT WORKS
+         ============================================ -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">🚀 कैसे काम करे</span>
+                <h2 class="section-title">बस 4 आसान स्टेप</h2>
+                <p class="section-subtitle">
+                    कुछ मिनटों में शुरू करें
+                </p>
+            </div>
+            <div class="steps-container">
+                <div class="steps-line"></div>
+                <div class="step-item animate-on-scroll">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">📱</div>
+                    <h3 class="step-title">ऐप खोलें</h3>
+                    <p class="step-desc">अपने फोन में ऐप खोलें और साइन अप करें</p>
+                </div>
+                <div class="step-item animate-on-scroll">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">👥</div>
+                    <h3 class="step-title">ग्राहक जोड़ें</h3>
+                    <p class="step-desc">अपने सभी ग्राहकों को ऐप में जोड़ें</p>
+                </div>
+                <div class="step-item animate-on-scroll">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">📝</div>
+                    <h3 class="step-title">एंट्री करें</h3>
+                    <p class="step-desc">रोज़ सुबह-शाम दूध की एंट्री करें</p>
+                </div>
+                <div class="step-item animate-on-scroll">
+                    <div class="step-number">4</div>
+                    <div class="step-icon">💰</div>
+                    <h3 class="step-title">बिल बनाएं</h3>
+                    <p class="step-desc">महीने के अंत में बिल बनाएं और भुगतान लें</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         BENEFITS SECTION
+         ============================================ -->
+    <section class="benefits" id="benefits">
+        <div class="container">
+            <div class="benefits-image animate-on-scroll">
+                <div style="background: var(--gradient-1); padding: 60px; border-radius: 30px; text-align: center;">
+                    <div style="font-size: 120px; margin-bottom: 20px;"><img src="assest/preloading.png" alt=""></div>
+                    <h3 style="color: white; font-size: 28px; margin-bottom: 5px;">दूध वाला</h3>
+                    <p style="color: rgba(255,255,255,0.8);">Trusted by 10,000+ Milk Vendors</p>
+                </div>
+                <div class="benefits-img-overlay">
+                    <h3>100%</h3>
+                    <p>मुफ्त ऐप</p>
+                </div>
+            </div>
+            <div class="benefits-content animate-on-scroll">
+                <h2>क्यों चुनें दूध वाला?</h2>
+                <p>
+                    पुराने रजिस्टर और कॉपी-पेन छोड़िए। 
+                    अब हिसाब रखना हुआ स्मार्ट और आसान।
+                </p>
+                <div class="benefits-list">
+                    <div class="benefit-item">
+                        <div class="benefit-icon">⏱️</div>
+                        <div class="benefit-text">
+                            <h4>समय बचाएं</h4>
+                            <p>रोज़ का काम 10 मिनट में निपटाएं</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">🔒</div>
+                        <div class="benefit-text">
+                            <h4>डेटा सुरक्षित</h4>
+                            <p>Cloud में बैकअप, फोन खो जाए तो भी डेटा सेफ</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">📵</div>
+                        <div class="benefit-text">
+                            <h4>ऑफलाइन मोड</h4>
+                            <p>बिना इंटरनेट भी सब काम करें</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">🌐</div>
+                        <div class="benefit-text">
+                            <h4>हिंदी में</h4>
+                            <p>पूरा ऐप हिंदी में, इस्तेमाल करना आसान</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">💯</div>
+                        <div class="benefit-text">
+                            <h4>बिल्कुल मुफ्त</h4>
+                            <p>कोई hidden charges नहीं, हमेशा फ्री</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         TESTIMONIALS
+         ============================================ -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">⭐ रिव्यू</span>
+                <h2 class="section-title">लोग क्या कहते हैं</h2>
+                <p class="section-subtitle">
+                    हज़ारों दूध विक्रेता पहले से इस्तेमाल कर रहे हैं
+                </p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card animate-on-scroll">
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">
+                        बहुत ही बढ़िया ऐप है! पहले रजिस्टर में लिखता था, 
+                        अब फोन से 2 मिनट में हो जाता है। 
+                        WhatsApp पर बिल भेजना तो कमाल है!
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">र</div>
+                        <div class="testimonial-info">
+                            <h4>रामलाल शर्मा</h4>
+                            <p>जयपुर, राजस्थान</p>
+                            <div class="testimonial-rating">
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card animate-on-scroll">
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">
+                        मेरे 80+ ग्राहक हैं। पहले सबका हिसाब याद रखना मुश्किल था।
+                        अब सब कुछ ऐप में है। बहुत आसान और सुंदर ऐप है।
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">स</div>
+                        <div class="testimonial-info">
+                            <h4>सुरेश यादव</h4>
+                            <p>लखनऊ, UP</p>
+                            <div class="testimonial-rating">
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card animate-on-scroll">
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">
+                        गांव में नेटवर्क नहीं आता, फिर भी ऐप चलता है!
+                        जब नेटवर्क आता है तो अपने-आप sync हो जाता है।
+                        बहुत अच्छा सोचा है।
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">म</div>
+                        <div class="testimonial-info">
+                            <h4>मोहन सिंह</h4>
+                            <p>मेरठ, UP</p>
+                            <div class="testimonial-rating">
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CTA SECTION
+         ============================================ -->
+    <section class="cta-section" id="download">
+        <div class="container">
+            <div class="cta-box animate-on-scroll">
+                <div class="cta-content">
+                    <div class="cta-icon"><img src="assest/logo header.png" alt=""></div>
+                    <h2 class="cta-title">आज ही शुरू करें!</h2>
+                    <p class="cta-subtitle">
+                        दूध का हिसाब-किताब आसान बनाएं। 
+                        हज़ारों दूध विक्रेताओं के साथ जुड़ें।
+                    </p>
+                    <div class="cta-price">
+                        <span class="free-badge">🎉 बिल्कुल मुफ्त!</span>
+                        <p>कोई hidden charges नहीं • कोई विज्ञापन नहीं</p>
+                    </div>
+                    <div class="cta-buttons">
+                        <a href="https://t.me/myapssabhi/2" class="btn btn-cta">
+                            <i class="fas fa-rocket"></i>
+                            ऐप खोलें
+                        </a>
+                        <a href="signup.html" class="btn btn-outline">
+                            <i class="fas fa-user-plus"></i>
+                            साइन अप करें
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FAQ SECTION
+         ============================================ -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">❓ FAQ</span>
+                <h2 class="section-title">अक्सर पूछे जाने वाले सवाल</h2>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item active">
+                    <div class="faq-question">
+                        <h4>क्या यह ऐप मुफ्त है?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>हाँ, यह ऐप पूरी तरह मुफ्त है। कोई hidden charges नहीं है और कोई विज्ञापन भी नहीं है। आप सभी features बिना किसी पैसे के इस्तेमाल कर सकते हैं।</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>क्या ऑफलाइन काम करता है?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>हाँ, ऐप पूरी तरह ऑफलाइन काम करता है। आप बिना इंटरनेट के ग्राहक जोड़ सकते हैं, एंट्री कर सकते हैं, बिल देख सकते हैं। जब इंटरनेट आएगा तो डेटा अपने-आप क्लाउड में सेव हो जाएगा।</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>मेरा डेटा सुरक्षित है?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>आपका डेटा Google के सुरक्षित सर्वर पर स्टोर होता है। हर यूज़र का डेटा अलग-अलग और प्राइवेट रहता है। कोई दूसरा आपका डेटा नहीं देख सकता।</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>फोन खो जाए तो?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>कोई चिंता नहीं! आपका सारा डेटा क्लाउड में सेव रहता है। नए फोन में ऐप इंस्टॉल करें, उसी ईमेल से लॉगिन करें - सारा डेटा वापस आ जाएगा।</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>WhatsApp पर बिल कैसे भेजें?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>ग्राहक का बिल खोलें और 'शेयर' बटन दबाएं। WhatsApp अपने-आप खुल जाएगा जिसमें बिल का सारांश टेक्स्ट में तैयार होगा। बस भेजें!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <span><img src="assest/logowithname.png" alt=""></span>
+                        दूध वाला
+                    </div>
+                    <p>
+                        गांव के दूध विक्रेताओं के लिए सबसे आसान ऐप।
+                        हिसाब-किताब अब स्मार्ट और आसान।
+                    </p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#features">विशेषताएं</a></li>
+                        <li><a href="#how-it-works">कैसे काम करे</a></li>
+                        <li><a href="#benefits">फायदे</a></li>
+                        <li><a href="#testimonials">रिव्यू</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>App</h4>
+                    <ul>
+                        <li><a href="https://t.me/myapssabhi/2">ऐप खोलें</a></li>
+                        <li><a href="signup.html">साइन अप</a></li>
+                        <li><a href="#">ट्यूटोरियल</a></li>
+                        <li><a href="#">टिप्स</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="mailto:abhishekyadav954698@.com">📧 ईमेल करें</a></li>
+                        <li><a href="https://wa.me/919546983729">💬 WhatsApp</a></li>
+                        <li><a href="#">📞 कॉल करें</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 दूध वाला। Made with ❤️ in India</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================
+         JAVASCRIPT
+         ============================================ -->
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Animate on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const isActive = item.classList.contains('active');
+                
+                // Close all
+                document.querySelectorAll('.faq-item').forEach(faq => {
+                    faq.classList.remove('active');
+                });
+                
+                // Open clicked if wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Counter animation for stats
+        function animateCounter(el, target) {
+            let current = 0;
+            const increment = target / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    el.textContent = target >= 1000 ? (target/1000) + 'K+' : target + '+';
+                    clearInterval(timer);
+                } else {
+                    el.textContent = Math.floor(current);
+                }
+            }, 30);
+        }
+
+        // Mobile menu (basic toggle - you can enhance this)
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            });
+        }
+
+        console.log('🥛 Dudh Wala Promo Page Loaded!');
+    </script>
+
+</body>
+</html>
