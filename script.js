@@ -11,7 +11,7 @@
    ============================================ */
 const CONFIG = {
   // Firebase Configuration
-  // ⚠️ REPLACE WITH YOUR FIREBASE CONFIG
+  
   firebase: {
     apiKey: "AIzaSyB58oJpvSdFSvIeVF5w1VGwDcxlg0t4UcA",
     authDomain: "udhwala-259c0.firebaseapp.com",
@@ -22,7 +22,7 @@ const CONFIG = {
   },
 
   // Google Apps Script Web App URL
-  // ⚠️ REPLACE WITH YOUR DEPLOYED APPS SCRIPT URL
+
   apiUrl:
     "https://script.google.com/macros/s/AKfycbxf2px2kSl4OatmdJS2RR9WaRnkJ2r0aKg8E1GTtk3oBOOjAyF9eQPY212sGwiuEgcK3w/exec",
 
@@ -5824,4 +5824,5 @@ window.undoEntry = undoEntry;
 /* ============================================
    END OF SCRIPT
    ============================================ */
+
 console.log('🥛 Dudh Wala Script Loaded - Version', CONFIG.app.version);
