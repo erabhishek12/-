@@ -1,0 +1,2975 @@
+<!doctype html>
+<html lang="hi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#4A90A4" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="DudhWala" />
+    <meta
+      name="description"
+      content="Village milk vendor management app - दूध वाला"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <title>दूध वाला - Dudh Wala</title>
+
+    <!-- Favicon & Icons -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assest/logo header.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="assest/logo header.png"
+    />
+
+    <!-- PWA Manifest (Inline) -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#4A90A4" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Lottie Player -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ========== PRELOADER ========== -->
+    <div id="preloader" class="preloader">
+      <div class="preloader-content">
+        <div class="preloader-animation">
+          <!-- Animated Milk Icon using CSS -->
+<div class="preloader-animation">
+  <img
+    src="assest/preloading.png"
+    alt="Dudh Wala Logo"
+    class="preloader-logo"
+  />
+</div>
+
+        </div>
+        <h1 class="preloader-title">दूध वाला</h1>
+        <p class="preloader-tagline">Milk Collection Made Easy</p>
+        <div class="preloader-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== APP CONTAINER ========== -->
+    <div id="app" class="app-container" style="display: none">
+      <!-- ===== PAGES WRAPPER ===== -->
+      <div id="pages-container" class="pages-container">
+        <!-- ========== LOGIN PAGE ========== -->
+        <div id="page-login" class="page page-login" data-page="login">
+          <div class="auth-container">
+            <div class="auth-header">
+<div class="auth-logo">
+  <img
+    src="assest/preloading.png"
+    alt="Dudh Wala Logo"
+    class="logo-image-only"
+  />
+</div>
+
+
+              <h1 class="auth-title">दूध वाला</h1>
+              <p class="auth-subtitle">Milk Collection Made Easy</p>
+            </div>
+
+            <div class="auth-card neu-raised">
+              <form id="login-form" class="auth-form">
+                <div class="form-group">
+                  <label class="form-label" data-i18n="email">ईमेल</label>
+                  <div class="input-wrapper neu-pressed">
+                    <span class="input-icon">📧</span>
+                    <input
+                      type="email"
+                      id="login-email"
+                      class="form-input"
+                      placeholder="example@email.com"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" data-i18n="password">पासवर्ड</label>
+                  <div class="input-wrapper neu-pressed">
+                    <span class="input-icon">🔒</span>
+                    <input
+                      type="password"
+                      id="login-password"
+                      class="form-input"
+                      placeholder="••••••••"
+                      required
+                    />
+                    <button
+                      type="button"
+                      class="password-toggle"
+                      onclick="togglePassword('login-password', this)"
+                    >
+                      👁️
+                    </button>
+                  </div>
+                </div>
+
+                <div class="form-footer">
+                  <a
+                    href="#"
+                    class="forgot-link"
+                    onclick="showForgotPassword()"
+                    data-i18n="forgotPassword"
+                    >पासवर्ड भूल गए?</a
+                  >
+                </div>
+
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-block neu-raised"
+                >
+                  <span data-i18n="login">लॉगिन</span>
+                </button>
+              </form>
+
+              <div class="auth-divider">
+                <span data-i18n="or">या</span>
+              </div>
+
+              <button
+                id="google-signin-btn"
+                class="btn btn-google btn-block neu-flat"
+                onclick="signInWithGoogle()"
+              >
+                <svg
+                  class="google-icon"
+                  viewBox="0 0 24 24"
+                  width="20"
+                  height="20"
+                >
+                  <path
+                    fill="#4285F4"
+                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                  />
+                  <path
+                    fill="#34A853"
+                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                  />
+                  <path
+                    fill="#FBBC05"
+                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                  />
+                  <path
+                    fill="#EA4335"
+                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                  />
+                </svg>
+                <span data-i18n="googleSignIn">Google से लॉगिन</span>
+              </button>
+
+              <p class="auth-switch">
+                <span data-i18n="noAccount">अकाउंट नहीं है?</span>
+                <a href="#" onclick="showSignup()" data-i18n="signup"
+                  >साइन अप</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========== SIGNUP PAGE ========== -->
+        <div
+          id="page-signup"
+          class="page page-signup"
+          data-page="signup"
+          style="display: none"
+        >
+          <div class="auth-container">
+            <div class="auth-header">
+             <div class="auth-logo">
+  <img
+    src="assest/logowithname.png"
+    alt="Dudh Wala Logo"
+    class="auth-logo-img"
+  />
+</div>
+
+              <h1 class="auth-title">नया अकाउंट</h1>
+              <p class="auth-subtitle">Create your account</p>
+            </div>
+
+            <div class="auth-card neu-raised">
+              <form id="signup-form" class="auth-form">
+                <div class="form-group">
+                  <label class="form-label" data-i18n="name">नाम</label>
+                  <div class="input-wrapper neu-pressed">
+                    <span class="input-icon">👤</span>
+                    <input
+                      type="text"
+                      id="signup-name"
+                      class="form-input"
+                      placeholder="आपका नाम"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" data-i18n="email">ईमेल</label>
+                  <div class="input-wrapper neu-pressed">
+                    <span class="input-icon">📧</span>
+                    <input
+                      type="email"
+                      id="signup-email"
+                      class="form-input"
+                      placeholder="example@email.com"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" data-i18n="mobile">मोबाइल</label>
+                  <div class="input-wrapper neu-pressed">
+                    <span class="input-icon">📱</span>
+                    <input
+                      type="tel"
+                      id="signup-mobile"
+                      class="form-input"
+                      placeholder="9876543210"
+                      pattern="[6-9][0-9]{9}"
+                      maxlength="10"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" data-i18n="password">पासवर्ड</label>
+                  <div class="input-wrapper neu-pressed">
+                    <span class="input-icon">🔒</span>
+                    <input
+                      type="password"
+                      id="signup-password"
+                      class="form-input"
+                      placeholder="कम से कम 6 अक्षर"
+                      minlength="6"
+                      required
+                    />
+                    <button
+                      type="button"
+                      class="password-toggle"
+                      onclick="togglePassword('signup-password', this)"
+                    >
+                      👁️
+                    </button>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">पासवर्ड पुष्टि करें</label>
+                  <div class="input-wrapper neu-pressed">
+                    <span class="input-icon">🔒</span>
+                    <input
+                      type="password"
+                      id="signup-confirm-password"
+                      class="form-input"
+                      placeholder="दोबारा पासवर्ड डालें"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-block neu-raised"
+                >
+                  <span data-i18n="signup">साइन अप करें</span>
+                </button>
+              </form>
+
+              <div class="auth-divider">
+                <span data-i18n="or">या</span>
+              </div>
+
+              <button
+                class="btn btn-google btn-block neu-flat"
+                onclick="signInWithGoogle()"
+              >
+                <svg
+                  class="google-icon"
+                  viewBox="0 0 24 24"
+                  width="20"
+                  height="20"
+                >
+                  <path
+                    fill="#4285F4"
+                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                  />
+                  <path
+                    fill="#34A853"
+                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                  />
+                  <path
+                    fill="#FBBC05"
+                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                  />
+                  <path
+                    fill="#EA4335"
+                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                  />
+                </svg>
+                <span data-i18n="googleSignIn">Google से लॉगिन</span>
+              </button>
+
+              <p class="auth-switch">
+                <span data-i18n="haveAccount">अकाउंट है?</span>
+                <a href="#" onclick="showLogin()" data-i18n="login">लॉगिन</a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========== DASHBOARD PAGE ========== -->
+        <div
+          id="page-dashboard"
+          class="page page-dashboard"
+          data-page="dashboard"
+          style="display: none"
+        >
+          <!-- Header -->
+          <header class="app-header neu-flat">
+            <div class="header-left">
+              <h1 class="header-title">
+  <img
+    src="assest/logo header.png"
+    alt="Dudh Wala Logo"
+    class="header-logo"
+  />
+  <span>दूध वाला</span>
+</h1>
+
+            </div>
+            <div class="header-right">
+              <button
+                class="header-btn sync-btn"
+                onclick="manualSync()"
+                title="Sync"
+              >
+                <span class="sync-icon">🔄</span>
+                <span class="sync-badge" id="sync-badge" style="display: none"
+                  >0</span
+                >
+              </button>
+              <button
+                class="header-btn profile-btn"
+                onclick="navigate('settings')"
+                title="Profile"
+              >
+                <span class="profile-icon">👤</span>
+              </button>
+            </div>
+          </header>
+
+          <!-- Main Content -->
+          <main class="page-content dashboard-content">
+            <!-- Date Display -->
+            <div class="date-display">
+              <span class="date-icon">📅</span>
+              <span class="date-text" id="today-date">--</span>
+              <span class="online-status" id="online-status">
+                <span class="status-dot online"></span>
+                <span class="status-text" data-i18n="online">ऑनलाइन</span>
+              </span>
+            </div>
+
+            <!-- Shift Cards -->
+            <div class="shift-cards">
+              <div
+                class="shift-card morning-card neu-raised"
+                onclick="navigate('quick-entry', { shift: 'morning' })"
+              >
+                <div class="shift-header">
+                  <span class="shift-icon">☀️</span>
+                  <span class="shift-name" data-i18n="morning">सुबह</span>
+                </div>
+                <div class="shift-stats">
+                  <div class="stat-item">
+                    <span class="stat-value" id="morning-kg">0</span>
+                    <span class="stat-unit" data-i18n="kg">किलो</span>
+                  </div>
+                  <div class="stat-item">
+                    <span class="stat-value" id="morning-amount">₹0</span>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="shift-card evening-card neu-raised"
+                onclick="navigate('quick-entry', { shift: 'evening' })"
+              >
+                <div class="shift-header">
+                  <span class="shift-icon">🌙</span>
+                  <span class="shift-name" data-i18n="evening">शाम</span>
+                </div>
+                <div class="shift-stats">
+                  <div class="stat-item">
+                    <span class="stat-value" id="evening-kg">0</span>
+                    <span class="stat-unit" data-i18n="kg">किलो</span>
+                  </div>
+                  <div class="stat-item">
+                    <span class="stat-value" id="evening-amount">₹0</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Summary Cards -->
+            <div class="summary-grid">
+              <div class="summary-card neu-flat">
+                <div class="summary-icon">🥛</div>
+                <div class="summary-info">
+                  <span class="summary-value" id="total-milk">0</span>
+                  <span class="summary-label" data-i18n="todayMilk"
+                    >आज का दूध</span
+                  >
+                </div>
+              </div>
+
+              <div class="summary-card neu-flat">
+                <div class="summary-icon">💰</div>
+                <div class="summary-info">
+                  <span class="summary-value" id="today-income">₹0</span>
+                  <span class="summary-label" data-i18n="todayIncome"
+                    >आज की आमदनी</span
+                  >
+                </div>
+              </div>
+
+              <div class="summary-card neu-flat">
+                <div class="summary-icon">👥</div>
+                <div class="summary-info">
+                  <span class="summary-value" id="active-customers">0</span>
+                  <span class="summary-label" data-i18n="activeCustomers"
+                    >सक्रिय ग्राहक</span
+                  >
+                </div>
+              </div>
+
+              <div class="summary-card neu-flat warning">
+                <div class="summary-icon">🔴</div>
+                <div class="summary-info">
+                  <span class="summary-value" id="pending-dues">₹0</span>
+                  <span class="summary-label" data-i18n="pendingDues"
+                    >बकाया राशि</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Entry Button -->
+            <button
+              class="quick-entry-btn neu-raised"
+              onclick="navigate('quick-entry')"
+            >
+              <span class="qe-icon">➕</span>
+              <span class="qe-text" data-i18n="quickEntry">त्वरित एंट्री</span>
+            </button>
+
+            <!-- Recent Entries -->
+            <div class="recent-section">
+              <div class="section-header">
+                <h3 class="section-title">हाल की एंट्री</h3>
+                <a href="#" class="see-all-link" onclick="navigate('reports')"
+                  >सभी देखें →</a
+                >
+              </div>
+              <div class="recent-list" id="recent-entries">
+                <!-- Populated by JS -->
+                <div class="empty-state">
+                  <span class="empty-icon">📝</span>
+                  <p class="empty-text" data-i18n="noData">कोई एंट्री नहीं</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Alerts Section -->
+            <div
+              class="alerts-section"
+              id="alerts-section"
+              style="display: none"
+            >
+              <div class="section-header">
+                <h3 class="section-title">⚠️ ध्यान दें</h3>
+              </div>
+              <div class="alerts-list" id="alerts-list">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+          </main>
+        </div>
+
+        <!-- ========== CUSTOMERS LIST PAGE ========== -->
+        <div
+          id="page-customers"
+          class="page page-customers"
+          data-page="customers"
+          style="display: none"
+        >
+          <!-- Header -->
+          <header class="app-header neu-flat">
+            <div class="header-left">
+              <h1 class="header-title" data-i18n="customers">👥 ग्राहक</h1>
+            </div>
+            <div class="header-right">
+              <button
+                class="header-btn add-btn"
+                onclick="navigate('customer-form')"
+                title="Add Customer"
+              >
+                <span>➕</span>
+              </button>
+            </div>
+          </header>
+
+          <!-- Main Content -->
+          <main class="page-content">
+            <!-- Search Bar -->
+            <div class="search-bar neu-pressed">
+              <span class="search-icon">🔍</span>
+              <input
+                type="text"
+                id="customer-search"
+                class="search-input"
+                placeholder="नाम या मोबाइल खोजें..."
+                oninput="filterCustomers()"
+              />
+              <button
+                class="search-clear"
+                onclick="clearCustomerSearch()"
+                style="display: none"
+              >
+                ✕
+              </button>
+            </div>
+
+            <!-- Filter/Sort Row -->
+            <div class="filter-row">
+              <div class="filter-tabs">
+                <button
+                  class="filter-tab active"
+                  data-filter="all"
+                  onclick="setCustomerFilter('all')"
+                  data-i18n="all"
+                >
+                  सभी
+                </button>
+                <button
+                  class="filter-tab"
+                  data-filter="active"
+                  onclick="setCustomerFilter('active')"
+                  data-i18n="active"
+                >
+                  सक्रिय
+                </button>
+                <button
+                  class="filter-tab"
+                  data-filter="inactive"
+                  onclick="setCustomerFilter('inactive')"
+                  data-i18n="inactive"
+                >
+                  निष्क्रिय
+                </button>
+              </div>
+              <button class="sort-btn neu-flat" onclick="showSortOptions()">
+                <span>⇅</span>
+              </button>
+            </div>
+
+            <!-- Customer Count -->
+            <div class="list-count">
+              <span id="customer-count">0 ग्राहक</span>
+            </div>
+
+            <!-- Customer List -->
+            <div class="customer-list" id="customer-list">
+              <!-- Populated by JS -->
+              <div class="empty-state">
+                <span class="empty-icon">👥</span>
+                <p class="empty-text">कोई ग्राहक नहीं</p>
+                <button
+                  class="btn btn-primary btn-sm"
+                  onclick="navigate('customer-form')"
+                >
+                  <span>➕</span> ग्राहक जोड़ें
+                </button>
+              </div>
+            </div>
+          </main>
+        </div>
+
+        <!-- ========== CUSTOMER FORM PAGE ========== -->
+        <div
+          id="page-customer-form"
+          class="page page-customer-form"
+          data-page="customer-form"
+          style="display: none"
+        >
+          <!-- Header -->
+          <header class="app-header neu-flat">
+            <div class="header-left">
+              <button class="header-btn back-btn" onclick="goBack()">
+                <span>←</span>
+              </button>
+              <h1 class="header-title" id="customer-form-title">नया ग्राहक</h1>
+            </div>
+            <div class="header-right">
+              <button
+                class="header-btn delete-btn"
+                id="delete-customer-btn"
+                onclick="deleteCustomer()"
+                style="display: none"
+              >
+                <span>🗑️</span>
+              </button>
+            </div>
+          </header>
+
+          <!-- Main Content -->
+          <main class="page-content">
+            <form id="customer-form" class="form-container">
+              <input type="hidden" id="customer-id" />
+
+              <!-- Photo Upload -->
+              <div class="photo-upload-section">
+                <div
+                  class="photo-upload neu-pressed"
+                  onclick="
+                    document.getElementById('customer-photo-input').click()
+                  "
+                >
+                  <img
+                    id="customer-photo-preview"
+                    src=""
+                    alt=""
+                    style="display: none"
+                  />
+                  <span class="photo-placeholder" id="photo-placeholder"
+                    >📷</span
+                  >
+                  <span class="photo-text">फोटो जोड़ें</span>
+                </div>
+                <input
+                  type="file"
+                  id="customer-photo-input"
+                  accept="image/*"
+                  onchange="handlePhotoUpload(event)"
+                  style="display: none"
+                />
+              </div>
+
+              <!-- Name Field -->
+              <div class="form-group">
+                <label class="form-label required" data-i18n="name">नाम</label>
+                <div class="input-wrapper neu-pressed">
+                  <span class="input-icon">👤</span>
+                  <input
+                    type="text"
+                    id="customer-name"
+                    class="form-input"
+                    placeholder="ग्राहक का नाम"
+                    required
+                  />
+                </div>
+              </div>
+
+              <!-- Mobile Field -->
+              <div class="form-group">
+                <label class="form-label" data-i18n="mobile">मोबाइल</label>
+                <div class="input-wrapper neu-pressed">
+                  <span class="input-icon">📱</span>
+                  <input
+                    type="tel"
+                    id="customer-mobile"
+                    class="form-input"
+                    placeholder="9876543210"
+                    pattern="[6-9][0-9]{9}"
+                    maxlength="10"
+                  />
+                </div>
+              </div>
+
+              <!-- Village Field -->
+              <div class="form-group">
+                <label class="form-label" data-i18n="village">गांव</label>
+                <div class="input-wrapper neu-pressed">
+                  <span class="input-icon">🏘️</span>
+                  <input
+                    type="text"
+                    id="customer-village"
+                    class="form-input"
+                    placeholder="गांव का नाम"
+                  />
+                </div>
+              </div>
+
+              <!-- Rate Cards -->
+              <div class="rate-cards">
+                <div class="rate-card cow-rate neu-flat">
+                  <div class="rate-header">
+                    <span class="rate-icon">🐄</span>
+                    <span class="rate-label" data-i18n="cow">गाय</span>
+                  </div>
+                  <div class="rate-input-wrapper">
+                    <span class="currency">₹</span>
+                    <input
+                      type="number"
+                      id="customer-cow-rate"
+                      class="rate-input"
+                      placeholder="58"
+                      step="0.5"
+                      min="0"
+                    />
+                    <span class="rate-unit">/kg</span>
+                  </div>
+                </div>
+
+                <div class="rate-card buffalo-rate neu-flat">
+                  <div class="rate-header">
+                    <span class="rate-icon">🐃</span>
+                    <span class="rate-label" data-i18n="buffalo">भैंस</span>
+                  </div>
+                  <div class="rate-input-wrapper">
+                    <span class="currency">₹</span>
+                    <input
+                      type="number"
+                      id="customer-buffalo-rate"
+                      class="rate-input"
+                      placeholder="72"
+                      step="0.5"
+                      min="0"
+                    />
+                    <span class="rate-unit">/kg</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Default Milk Type -->
+              <div class="form-group">
+                <label class="form-label">डिफ़ॉल्ट दूध प्रकार</label>
+                <div class="milk-type-toggle neu-flat">
+                  <button
+                    type="button"
+                    class="toggle-btn"
+                    data-type="cow"
+                    onclick="setDefaultMilkType('cow')"
+                  >
+                    <span>🐄</span> गाय
+                  </button>
+                  <button
+                    type="button"
+                    class="toggle-btn active"
+                    data-type="buffalo"
+                    onclick="setDefaultMilkType('buffalo')"
+                  >
+                    <span>🐃</span> भैंस
+                  </button>
+                </div>
+                <input
+                  type="hidden"
+                  id="customer-default-milk-type"
+                  value="buffalo"
+                />
+              </div>
+
+              <!-- Notes Field -->
+              <div class="form-group">
+                <label class="form-label">नोट्स</label>
+                <div class="textarea-wrapper neu-pressed">
+                  <textarea
+                    id="customer-notes"
+                    class="form-textarea"
+                    rows="3"
+                    placeholder="कोई विशेष जानकारी..."
+                  ></textarea>
+                </div>
+              </div>
+
+              <!-- Active Status -->
+              <div class="form-group toggle-group">
+                <label class="form-label">ग्राहक सक्रिय है</label>
+                <label class="switch">
+                  <input type="checkbox" id="customer-active" checked />
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <!-- Save Button -->
+              <button
+                type="submit"
+                class="btn btn-primary btn-block btn-lg neu-raised"
+              >
+                <span>💾</span>
+                <span data-i18n="save">सेव करें</span>
+              </button>
+            </form>
+          </main>
+        </div>
+
+        <!-- Continuing in Part 2... -->
+        <!-- ========== CUSTOMER DETAIL PAGE ========== -->
+        <div
+          id="page-customer-detail"
+          class="page page-customer-detail"
+          data-page="customer-detail"
+          style="display: none"
+        >
+          <!-- Header -->
+          <header class="app-header neu-flat">
+            <div class="header-left">
+              <button class="header-btn back-btn" onclick="goBack()">
+                <span>←</span>
+              </button>
+              <h1 class="header-title">ग्राहक विवरण</h1>
+            </div>
+            <div class="header-right">
+              <button
+                class="header-btn edit-btn"
+                onclick="editCurrentCustomer()"
+              >
+                <span>✏️</span>
+              </button>
+              <button
+                class="header-btn delete-btn"
+                onclick="deleteCurrentCustomer()"
+              >
+                <span>🗑️</span>
+              </button>
+            </div>
+          </header>
+
+          <!-- Main Content -->
+          <main class="page-content">
+            <!-- Customer Profile Card -->
+            <div class="customer-profile-card neu-raised">
+              <div class="profile-photo">
+                <img id="detail-customer-photo" src="" alt="" />
+                <span class="profile-placeholder" id="detail-photo-placeholder"
+                  >👤</span
+                >
+              </div>
+              <div class="profile-info">
+                <h2 class="profile-name" id="detail-customer-name">--</h2>
+                <p class="profile-village" id="detail-customer-village">--</p>
+                <span class="profile-status active" id="detail-customer-status"
+                  >सक्रिय</span
+                >
+              </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+              <button
+                class="action-btn call-btn neu-flat"
+                id="detail-call-btn"
+                onclick="callCustomer()"
+              >
+                <span class="action-icon">📞</span>
+                <span class="action-text" data-i18n="call">कॉल</span>
+              </button>
+              <button
+                class="action-btn whatsapp-btn neu-flat"
+                id="detail-whatsapp-btn"
+                onclick="whatsappCustomer()"
+              >
+                <span class="action-icon">💬</span>
+                <span class="action-text" data-i18n="whatsapp">व्हाट्सएप</span>
+              </button>
+              <button
+                class="action-btn entry-btn neu-flat"
+                onclick="quickEntryForCustomer()"
+              >
+                <span class="action-icon">➕</span>
+                <span class="action-text">एंट्री</span>
+              </button>
+            </div>
+
+            <!-- Rate Cards -->
+            <div class="detail-rate-cards">
+              <div class="detail-rate-card cow neu-flat">
+                <span class="rate-icon">🐄</span>
+                <div class="rate-info">
+                  <span class="rate-type" data-i18n="cow">गाय</span>
+                  <span class="rate-value" id="detail-cow-rate">₹58/kg</span>
+                </div>
+              </div>
+              <div class="detail-rate-card buffalo neu-flat">
+                <span class="rate-icon">🐃</span>
+                <div class="rate-info">
+                  <span class="rate-type" data-i18n="buffalo">भैंस</span>
+                  <span class="rate-value" id="detail-buffalo-rate"
+                    >₹72/kg</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- Month Summary Card -->
+            <div class="month-summary-card neu-raised">
+              <div class="summary-header">
+                <button class="month-nav-btn" onclick="changeDetailMonth(-1)">
+                  ◀
+                </button>
+                <h3 class="summary-month" id="detail-summary-month">
+                  जनवरी 2024
+                </h3>
+                <button class="month-nav-btn" onclick="changeDetailMonth(1)">
+                  ▶
+                </button>
+              </div>
+              <div class="summary-grid-3">
+                <div class="summary-item">
+                  <span class="summary-value" id="detail-total-milk">0 kg</span>
+                  <span class="summary-label">दूध</span>
+                </div>
+                <div class="summary-item">
+                  <span class="summary-value" id="detail-total-amount">₹0</span>
+                  <span class="summary-label">कुल</span>
+                </div>
+                <div class="summary-item highlight">
+                  <span class="summary-value" id="detail-balance">₹0</span>
+                  <span class="summary-label">बाकी</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="detail-action-buttons">
+              <button
+                class="detail-action-btn neu-flat"
+                onclick="showAddPaymentForCustomer()"
+              >
+                <span>💵</span>
+                <span data-i18n="payment">भुगतान जोड़ें</span>
+              </button>
+              <button
+                class="detail-action-btn neu-flat"
+                onclick="showAddProductForCustomer()"
+              >
+                <span>📦</span>
+                <span data-i18n="product">सामान जोड़ें</span>
+              </button>
+              <button
+                class="detail-action-btn neu-flat"
+                onclick="viewCustomerBill()"
+              >
+                <span>🧾</span>
+                <span data-i18n="bill">बिल देखें</span>
+              </button>
+            </div>
+
+            <!-- History Tabs -->
+            <div class="history-section">
+              <div class="history-tabs">
+                <button
+                  class="history-tab active"
+                  data-tab="milk"
+                  onclick="switchHistoryTab('milk')"
+                >
+                  🥛 दूध
+                </button>
+                <button
+                  class="history-tab"
+                  data-tab="products"
+                  onclick="switchHistoryTab('products')"
+                >
+                  📦 सामान
+                </button>
+                <button
+                  class="history-tab"
+                  data-tab="payments"
+                  onclick="switchHistoryTab('payments')"
+                >
+                  💵 भुगतान
+                </button>
+              </div>
+
+              <div class="history-content" id="history-content">
+                <!-- Milk History -->
+                <div
+                  class="history-list"
+                  id="milk-history"
+                  data-tab-content="milk"
+                >
+                  <div class="empty-state">
+                    <span class="empty-icon">🥛</span>
+                    <p class="empty-text">कोई एंट्री नहीं</p>
+                  </div>
+                </div>
+
+                <!-- Products History -->
+                <div
+                  class="history-list"
+                  id="products-history"
+                  data-tab-content="products"
+                  style="display: none"
+                >
+                  <div class="empty-state">
+                    <span class="empty-icon">📦</span>
+                    <p class="empty-text">कोई सामान नहीं</p>
+                  </div>
+                </div>
+
+                <!-- Payments History -->
+                <div
+                  class="history-list"
+                  id="payments-history"
+                  data-tab-content="payments"
+                  style="display: none"
+                >
+                  <div class="empty-state">
+                    <span class="empty-icon">💵</span>
+                    <p class="empty-text">कोई भुगतान नहीं</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Notes Section -->
+            <div
+              class="notes-section"
+              id="detail-notes-section"
+              style="display: none"
+            >
+              <h4 class="notes-title">📝 नोट्स</h4>
+              <p class="notes-text" id="detail-notes-text"></p>
+            </div>
+          </main>
+        </div>
+
+        <!-- ========== QUICK ENTRY PAGE ========== -->
+        <div
+          id="page-quick-entry"
+          class="page page-quick-entry"
+          data-page="quick-entry"
+          style="display: none"
+        >
+          <!-- Header -->
+          <header class="app-header neu-flat">
+            <div class="header-left">
+              <button class="header-btn back-btn" onclick="goBack()">
+                <span>←</span>
+              </button>
+              <h1 class="header-title" data-i18n="quickEntry">त्वरित एंट्री</h1>
+            </div>
+            <div class="header-right">
+              <button class="header-btn" onclick="navigate('bulk-entry')">
+                <span>📋</span>
+              </button>
+            </div>
+          </header>
+
+          <!-- Main Content -->
+          <main class="page-content">
+            <!-- Date Selector -->
+            <div class="date-selector neu-flat">
+              <button class="date-nav-btn" onclick="changeEntryDate(-1)">
+                ◀
+              </button>
+              <div class="date-display-input" onclick="openDatePicker()">
+                <span class="date-icon">📅</span>
+                <input
+                  type="date"
+                  id="entry-date"
+                  class="date-input"
+                  onchange="onEntryDateChange()"
+                />
+                <span class="date-text" id="entry-date-display">आज</span>
+              </div>
+              <button class="date-nav-btn" onclick="changeEntryDate(1)">
+                ▶
+              </button>
+            </div>
+
+            <!-- Shift Toggle -->
+            <div class="shift-toggle neu-flat">
+              <button
+                class="shift-btn active"
+                data-shift="morning"
+                onclick="setEntryShift('morning')"
+              >
+                <span class="shift-icon">☀️</span>
+                <span class="shift-name" data-i18n="morning">सुबह</span>
+              </button>
+              <button
+                class="shift-btn"
+                data-shift="evening"
+                onclick="setEntryShift('evening')"
+              >
+                <span class="shift-icon">🌙</span>
+                <span class="shift-name" data-i18n="evening">शाम</span>
+              </button>
+            </div>
+
+            <!-- Progress Indicator -->
+            <div class="entry-progress">
+              <div class="progress-bar">
+                <div
+                  class="progress-fill"
+                  id="entry-progress-fill"
+                  style="width: 0%"
+                ></div>
+              </div>
+              <span class="progress-text" id="entry-progress-text"
+                >0/0 हो गया</span
+              >
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-bar neu-pressed">
+              <span class="search-icon">🔍</span>
+              <input
+                type="text"
+                id="entry-customer-search"
+                class="search-input"
+                placeholder="ग्राहक खोजें..."
+                oninput="filterEntryCustomers()"
+              />
+              <button
+                class="search-clear"
+                onclick="clearEntrySearch()"
+                style="display: none"
+              >
+                ✕
+              </button>
+            </div>
+
+            <!-- Customer Entry List -->
+            <div class="entry-customer-list" id="entry-customer-list">
+              <!-- Populated by JS -->
+              <div class="empty-state">
+                <span class="empty-icon">👥</span>
+                <p class="empty-text">कोई ग्राहक नहीं</p>
+                <button
+                  class="btn btn-primary btn-sm"
+                  onclick="navigate('customer-form')"
+                >
+                  <span>➕</span> ग्राहक जोड़ें
+                </button>
+              </div>
+            </div>
+          </main>
+        </div>
+
+        <!-- ========== BULK ENTRY PAGE ========== -->
+        <div
+          id="page-bulk-entry"
+          class="page page-bulk-entry"
+          data-page="bulk-entry"
+          style="display: none"
+        >
+          <!-- Header -->
+          <header class="app-header neu-flat">
+            <div class="header-left">
+              <button class="header-btn back-btn" onclick="goBack()">
+                <span>←</span>
+              </button>
+              <h1 class="header-title">बल्क एंट्री</h1>
+            </div>
+          </header>
+
+          <!-- Main Content -->
+          <main class="page-content">
+            <!-- Date & Shift Info -->
+            <div class="bulk-info-bar neu-flat">
+              <div class="bulk-date">
+                <span class="date-icon">📅</span>
+                <span id="bulk-date-display">--</span>
+              </div>
+              <div class="bulk-shift" id="bulk-shift-display">
+                <span class="shift-icon">☀️</span>
+                <span>सुबह</span>
+              </div>
+            </div>
+
+            <!-- Bulk Entry Table -->
+            <div class="bulk-table-container">
+              <table class="bulk-table">
+                <thead>
+                  <tr>
+                    <th class="th-customer">ग्राहक</th>
+                    <th class="th-type">प्रकार</th>
+                    <th class="th-qty">किलो</th>
+                    <th class="th-amount">राशि</th>
+                  </tr>
+                </thead>
+                <tbody id="bulk-table-body">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Total Footer -->
+            <div class="bulk-total-footer neu-raised">
+              <div class="total-item">
+                <span class="total-label">कुल किलो:</span>
+                <span class="total-value" id="bulk-total-kg">0 kg</span>
+              </div>
+              <div class="total-item">
+                <span class="total-label">कुल राशि:</span>
+                <span class="total-value" id="bulk-total-amount">₹0</span>
+              </div>
+            </div>
+
+            <!-- Save Button -->
+            <button
+              class="btn btn-primary btn-block btn-lg neu-raised save-all-btn"
+              onclick="saveBulkEntries()"
+            >
+              <span>💾</span>
+              <span>सभी सेव करें</span>
+            </button>
+          </main>
+        </div>
+
+        <!-- ========== PRODUCTS PAGE ========== -->
+        <div
+          id="page-products"
+          class="page page-products"
+          data-page="products"
+          style="display: none"
+        >
+          <!-- Header -->
+          <header class="app-header neu-flat">
+            <div class="header-left">
+              <button class="header-btn back-btn" onclick="goBack()">
+                <span>←</span>
+              </button>
+              <h1 class="header-title">📦 अतिरिक्त सामान</h1>
+            </div>
+            <div class="header-right">
+              <button
+                class="header-btn add-btn"
+                onclick="showAddProductModal()"
+              >
+                <span>➕</span>
+              </button>
+            </div>
+          </header>
+
+          <!-- Main Content -->
+          <main class="page-content">
+            <!-- Month Selector -->
+            <div class="month-selector neu-flat">
+              <button class="month-nav-btn" onclick="changeProductsMonth(-1)">
+                ◀
+              </button>
+              <span class="month-display" id="products-month-display"
+                >जनवरी 2024</span
+              >
+              <button class="month-nav-btn" onclick="changeProductsMonth(1)">
+                ▶
+              </button>
+            </div>
+
+            <!-- Monthly Total -->
+            <div class="monthly-total-card neu-raised">
+              <span class="total-label">इस महीने का कुल:</span>
+              <span class="total-value" id="products-monthly-total">₹0</span>
+            </div>
+
+            <!-- Products List -->
+            <div class="products-list" id="products-list">
+              <!-- Populated by JS -->
+              <div class="empty-state">
+                <span class="empty-icon">📦</span>
+                <p class="empty-text">कोई सामान नहीं</p>
+                <button
+                  class="btn btn-primary btn-sm"
+                  onclick="showAddProductModal()"
+                >
+                  <span>➕</span> सामान जोड़ें
+                </button>
+              </div>
+            </div>
+          </main>
+        </div>
+
+        <!-- ========== PAYMENTS PAGE ========== -->
+        <div
+          id="page-payments"
+          class="page page-payments"
+          data-page="payments"
+          style="display: none"
+        >
+          <!-- Header -->
+          <header class="app-header neu-flat">
+            <div class="header-left">
+              <button class="header-btn back-btn" onclick="goBack()">
+                <span>←</span>
+              </button>
+              <h1 class="header-title">💵 भुगतान</h1>
+            </div>
+            <div class="header-right">
+              <button
+                class="header-btn add-btn"
+                onclick="showAddPaymentModal()"
+              >
+                <span>➕</span>
+              </button>
+            </div>
+          </header>
+
+          <!-- Main Content -->
+          <main class="page-content">
+            <!-- Month Summary Card -->
+            <div class="payment-summary-card neu-raised">
+              <div class="summary-header">
+                <button class="month-nav-btn" onclick="changePaymentsMonth(-1)">
+                  ◀
+                </button>
+                <h3 class="summary-month" id="payments-month-display">
+                  जनवरी 2024
+                </h3>
+                <button class="month-nav-btn" onclick="changePaymentsMonth(1)">
+                  ▶
+                </button>
+              </div>
+              <div class="payment-summary-grid">
+                <div class="payment-summary-item">
+                  <span class="item-value" id="payments-total-bill">₹0</span>
+                  <span class="item-label">कुल बिल</span>
+                </div>
+                <div class="payment-summary-item success">
+                  <span class="item-value" id="payments-received">₹0</span>
+                  <span class="item-label">प्राप्त</span>
+                </div>
+                <div class="payment-summary-item danger">
+                  <span class="item-value" id="payments-pending">₹0</span>
+                  <span class="item-label">बाकी</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pending Dues Section -->
+            <div class="section-block">
+              <div class="section-header">
+                <h3 class="section-title">🔴 बकाया राशि</h3>
+              </div>
+              <div class="pending-dues-list" id="pending-dues-list">
+                <!-- Populated by JS -->
+                <div class="empty-state small">
+                  <p class="empty-text">कोई बकाया नहीं 🎉</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Recent Payments Section -->
+            <div class="section-block">
+              <div class="section-header">
+                <h3 class="section-title">💵 हाल के भुगतान</h3>
+              </div>
+              <div class="payments-list" id="payments-list">
+                <!-- Populated by JS -->
+                <div class="empty-state small">
+                  <p class="empty-text">कोई भुगतान नहीं</p>
+                </div>
+              </div>
+            </div>
+          </main>
+        </div>
+
+        <!-- ========== REPORTS PAGE ========== -->
+        <div
+          id="page-reports"
+          class="page page-reports"
+          data-page="reports"
+          style="display: none"
+        >
+          <!-- Header -->
+          <header class="app-header neu-flat">
+            <div class="header-left">
+              <h1 class="header-title" data-i18n="reports">📊 रिपोर्ट</h1>
+            </div>
+            <div class="header-right">
+              <button class="header-btn export-btn" onclick="exportReport()">
+                <span>📥</span>
+              </button>
+            </div>
+          </header>
+
+          <!-- Main Content -->
+          <main class="page-content">
+            <!-- Report Type Tabs -->
+            <div class="report-tabs neu-flat">
+              <button
+                class="report-tab active"
+                data-report="daily"
+                onclick="switchReportType('daily')"
+              >
+                <span data-i18n="daily">दैनिक</span>
+              </button>
+              <button
+                class="report-tab"
+                data-report="monthly"
+                onclick="switchReportType('monthly')"
+              >
+                <span data-i18n="monthly">मासिक</span>
+              </button>
+              <button
+                class="report-tab"
+                data-report="yearly"
+                onclick="switchReportType('yearly')"
+              >
+                <span data-i18n="yearly">वार्षिक</span>
+              </button>
+            </div>
+
+            <!-- Date/Month/Year Selector -->
+            <div class="report-date-selector" id="report-date-selector">
+              <!-- Daily Selector -->
+              <div class="date-selector neu-flat" id="daily-selector">
+                <button class="date-nav-btn" onclick="changeReportDate(-1)">
+                  ◀
+                </button>
+                <div class="date-display-input">
+                  <span class="date-icon">📅</span>
+                  <input
+                    type="date"
+                    id="report-date"
+                    class="date-input"
+                    onchange="onReportDateChange()"
+                  />
+                  <span class="date-text" id="report-date-display">--</span>
+                </div>
+                <button class="date-nav-btn" onclick="changeReportDate(1)">
+                  ▶
+                </button>
+              </div>
+
+              <!-- Monthly Selector -->
+              <div
+                class="month-selector neu-flat"
+                id="monthly-selector"
+                style="display: none"
+              >
+                <button class="month-nav-btn" onclick="changeReportMonth(-1)">
+                  ◀
+                </button>
+                <span class="month-display" id="report-month-display"
+                  >जनवरी 2024</span
+                >
+                <button class="month-nav-btn" onclick="changeReportMonth(1)">
+                  ▶
+                </button>
+              </div>
+
+              <!-- Yearly Selector -->
+              <div
+                class="year-selector neu-flat"
+                id="yearly-selector"
+                style="display: none"
+              >
+                <button class="year-nav-btn" onclick="changeReportYear(-1)">
+                  ◀
+                </button>
+                <span class="year-display" id="report-year-display">2024</span>
+                <button class="year-nav-btn" onclick="changeReportYear(1)">
+                  ▶
+                </button>
+              </div>
+            </div>
+
+            <!-- Report Content -->
+            <div class="report-content" id="report-content">
+              <!-- Daily Report -->
+              <div class="daily-report" id="daily-report">
+                <!-- Shift Breakdown -->
+                <div class="shift-breakdown">
+                  <div class="breakdown-card morning neu-flat">
+                    <div class="breakdown-header">
+                      <span class="breakdown-icon">☀️</span>
+                      <span class="breakdown-title">सुबह</span>
+                    </div>
+                    <div class="breakdown-stats">
+                      <div class="breakdown-stat">
+                        <span class="stat-value" id="report-morning-kg">0</span>
+                        <span class="stat-label">किलो</span>
+                      </div>
+                      <div class="breakdown-stat">
+                        <span class="stat-value" id="report-morning-amount"
+                          >₹0</span
+                        >
+                        <span class="stat-label">राशि</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="breakdown-card evening neu-flat">
+                    <div class="breakdown-header">
+                      <span class="breakdown-icon">🌙</span>
+                      <span class="breakdown-title">शाम</span>
+                    </div>
+                    <div class="breakdown-stats">
+                      <div class="breakdown-stat">
+                        <span class="stat-value" id="report-evening-kg">0</span>
+                        <span class="stat-label">किलो</span>
+                      </div>
+                      <div class="breakdown-stat">
+                        <span class="stat-value" id="report-evening-amount"
+                          >₹0</span
+                        >
+                        <span class="stat-label">राशि</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Total Card -->
+                <div class="report-total-card neu-raised">
+                  <div class="total-row">
+                    <span class="total-label">कुल दूध:</span>
+                    <span class="total-value" id="report-daily-total-kg"
+                      >0 kg</span
+                    >
+                  </div>
+                  <div class="total-row">
+                    <span class="total-label">कुल राशि:</span>
+                    <span
+                      class="total-value highlight"
+                      id="report-daily-total-amount"
+                      >₹0</span
+                    >
+                  </div>
+                  <div class="total-row sub">
+                    <span class="total-label">🐄 गाय:</span>
+                    <span class="total-value" id="report-daily-cow">0 kg</span>
+                  </div>
+                  <div class="total-row sub">
+                    <span class="total-label">🐃 भैंस:</span>
+                    <span class="total-value" id="report-daily-buffalo"
+                      >0 kg</span
+                    >
+                  </div>
+                </div>
+
+                <!-- Customer-wise List -->
+                <div class="section-block">
+                  <div class="section-header">
+                    <h3 class="section-title">ग्राहक वार विवरण</h3>
+                  </div>
+                  <div class="report-customer-list" id="report-daily-customers">
+                    <div class="empty-state small">
+                      <p class="empty-text">कोई एंट्री नहीं</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Monthly Report -->
+              <div
+                class="monthly-report"
+                id="monthly-report"
+                style="display: none"
+              >
+                <!-- Monthly Summary Cards -->
+                <div class="monthly-summary-grid">
+                  <div class="monthly-stat-card neu-flat">
+                    <span class="stat-icon">🥛</span>
+                    <span class="stat-value" id="report-monthly-milk"
+                      >0 kg</span
+                    >
+                    <span class="stat-label">कुल दूध</span>
+                  </div>
+                  <div class="monthly-stat-card neu-flat">
+                    <span class="stat-icon">💰</span>
+                    <span class="stat-value" id="report-monthly-amount"
+                      >₹0</span
+                    >
+                    <span class="stat-label">दूध राशि</span>
+                  </div>
+                  <div class="monthly-stat-card neu-flat">
+                    <span class="stat-icon">📦</span>
+                    <span class="stat-value" id="report-monthly-products"
+                      >₹0</span
+                    >
+                    <span class="stat-label">सामान</span>
+                  </div>
+                  <div class="monthly-stat-card neu-flat">
+                    <span class="stat-icon">💵</span>
+                    <span class="stat-value" id="report-monthly-payments"
+                      >₹0</span
+                    >
+                    <span class="stat-label">प्राप्त</span>
+                  </div>
+                </div>
+
+                <!-- Monthly Totals -->
+                <div class="report-total-card neu-raised">
+                  <div class="total-row">
+                    <span class="total-label">कुल बिल:</span>
+                    <span class="total-value" id="report-monthly-total-bill"
+                      >₹0</span
+                    >
+                  </div>
+                  <div class="total-row">
+                    <span class="total-label">प्राप्त राशि:</span>
+                    <span
+                      class="total-value success"
+                      id="report-monthly-received"
+                      >₹0</span
+                    >
+                  </div>
+                  <div class="total-row">
+                    <span class="total-label">बकाया राशि:</span>
+                    <span class="total-value danger" id="report-monthly-pending"
+                      >₹0</span
+                    >
+                  </div>
+                </div>
+
+                <!-- Milk Type Breakdown -->
+                <div class="milk-type-breakdown neu-flat">
+                  <div class="type-item">
+                    <span class="type-icon">🐄</span>
+                    <span class="type-label">गाय</span>
+                    <span class="type-value" id="report-monthly-cow">0 kg</span>
+                  </div>
+                  <div class="type-divider"></div>
+                  <div class="type-item">
+                    <span class="type-icon">🐃</span>
+                    <span class="type-label">भैंस</span>
+                    <span class="type-value" id="report-monthly-buffalo"
+                      >0 kg</span
+                    >
+                  </div>
+                </div>
+
+                <!-- Customer Breakdown Table -->
+                <div class="section-block">
+                  <div class="section-header">
+                    <h3 class="section-title">ग्राहक वार विवरण</h3>
+                  </div>
+                  <div class="report-table-container">
+                    <table class="report-table">
+                      <thead>
+                        <tr>
+                          <th>ग्राहक</th>
+                          <th>दूध (kg)</th>
+                          <th>राशि</th>
+                          <th>बाकी</th>
+                        </tr>
+                      </thead>
+                      <tbody id="report-monthly-customers">
+                        <!-- Populated by JS -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Yearly Report -->
+              <div
+                class="yearly-report"
+                id="yearly-report"
+                style="display: none"
+              >
+                <!-- Yearly Summary -->
+                <div class="yearly-summary-card neu-raised">
+                  <h3 class="yearly-title">वार्षिक सारांश</h3>
+                  <div class="yearly-stats">
+                    <div class="yearly-stat">
+                      <span class="stat-value" id="report-yearly-milk">0</span>
+                      <span class="stat-label">कुल दूध (kg)</span>
+                    </div>
+                    <div class="yearly-stat">
+                      <span class="stat-value" id="report-yearly-amount"
+                        >₹0</span
+                      >
+                      <span class="stat-label">कुल राशि</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Month-wise Comparison -->
+                <div class="section-block">
+                  <div class="section-header">
+                    <h3 class="section-title">महीने वार विवरण</h3>
+                  </div>
+                  <div class="yearly-months-list" id="report-yearly-months">
+                    <!-- Populated by JS -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </main>
+        </div>
+
+        <!-- ========== BILL VIEW PAGE ========== -->
+        <div
+          id="page-bill"
+          class="page page-bill"
+          data-page="bill"
+          style="display: none"
+        >
+          <!-- Header -->
+          <header class="app-header neu-flat no-print">
+            <div class="header-left">
+              <button class="header-btn back-btn" onclick="goBack()">
+                <span>←</span>
+              </button>
+              <h1 class="header-title">🧾 मासिक बिल</h1>
+            </div>
+            <div class="header-right">
+              <button class="header-btn" onclick="printBill()">
+                <span>🖨️</span>
+              </button>
+            </div>
+          </header>
+
+          <!-- Bill Content -->
+          <main class="page-content bill-content" id="bill-content">
+            <div class="bill-paper">
+              <!-- Vendor Header -->
+              <div class="bill-vendor-header">
+                <h2 class="vendor-name" id="bill-vendor-name">दूध वाला</h2>
+                <p class="vendor-contact" id="bill-vendor-contact">--</p>
+                <p class="vendor-address" id="bill-vendor-address">--</p>
+              </div>
+
+              <div class="bill-divider"></div>
+
+              <!-- Customer Info -->
+              <div class="bill-customer-info">
+                <div class="bill-row">
+                  <span class="bill-label">ग्राहक:</span>
+                  <span class="bill-value" id="bill-customer-name">--</span>
+                </div>
+                <div class="bill-row">
+                  <span class="bill-label">महीना:</span>
+                  <span class="bill-value" id="bill-month">--</span>
+                </div>
+              </div>
+
+              <div class="bill-divider"></div>
+
+              <!-- Milk Entries Table -->
+              <div class="bill-section">
+                <h4 class="bill-section-title">🥛 दूध विवरण</h4>
+                <table class="bill-table">
+                  <thead>
+                    <tr>
+                      <th>तारीख</th>
+                      <th>शिफ्ट</th>
+                      <th>प्रकार</th>
+                      <th>किलो</th>
+                      <th>दर</th>
+                      <th>राशि</th>
+                    </tr>
+                  </thead>
+                  <tbody id="bill-milk-entries">
+                    <!-- Populated by JS -->
+                  </tbody>
+                  <tfoot>
+                    <tr class="subtotal-row">
+                      <td colspan="3">दूध कुल</td>
+                      <td id="bill-milk-kg">0</td>
+                      <td></td>
+                      <td id="bill-milk-total">₹0</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+
+              <!-- Products Section -->
+              <div class="bill-section" id="bill-products-section">
+                <h4 class="bill-section-title">📦 अतिरिक्त सामान</h4>
+                <table class="bill-table">
+                  <thead>
+                    <tr>
+                      <th>तारीख</th>
+                      <th>सामान</th>
+                      <th>मात्रा</th>
+                      <th>राशि</th>
+                    </tr>
+                  </thead>
+                  <tbody id="bill-products-entries">
+                    <!-- Populated by JS -->
+                  </tbody>
+                  <tfoot>
+                    <tr class="subtotal-row">
+                      <td colspan="3">सामान कुल</td>
+                      <td id="bill-products-total">₹0</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+
+              <div class="bill-divider"></div>
+
+              <!-- Grand Total -->
+              <div class="bill-grand-total">
+                <div class="bill-total-row">
+                  <span>कुल बिल:</span>
+                  <span id="bill-grand-total">₹0</span>
+                </div>
+                <div
+                  class="bill-total-row"
+                  id="bill-previous-due-row"
+                  style="display: none"
+                >
+                  <span>पिछला बाकी:</span>
+                  <span id="bill-previous-due">₹0</span>
+                </div>
+              </div>
+
+              <!-- Payments Section -->
+              <div class="bill-section" id="bill-payments-section">
+                <h4 class="bill-section-title">💵 भुगतान प्राप्त</h4>
+                <table class="bill-table">
+                  <thead>
+                    <tr>
+                      <th>तारीख</th>
+                      <th>माध्यम</th>
+                      <th>राशि</th>
+                    </tr>
+                  </thead>
+                  <tbody id="bill-payments-entries">
+                    <!-- Populated by JS -->
+                  </tbody>
+                  <tfoot>
+                    <tr class="subtotal-row">
+                      <td colspan="2">कुल प्राप्त</td>
+                      <td id="bill-payments-total">₹0</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+
+              <div class="bill-divider"></div>
+
+              <!-- Balance Due -->
+              <div class="bill-balance">
+                <span class="balance-label">बाकी राशि:</span>
+                <span class="balance-value" id="bill-balance-due">₹0</span>
+              </div>
+
+              <!-- Bill Footer -->
+              <div class="bill-footer">
+                <p>धन्यवाद! 🙏</p>
+                <p class="bill-date" id="bill-generated-date">--</p>
+              </div>
+            </div>
+          </main>
+
+          <!-- Bill Actions -->
+          <div class="bill-actions no-print">
+            <button
+              class="bill-action-btn neu-flat"
+              onclick="downloadBillPDF()"
+            >
+              <span>📥</span>
+              <span>PDF</span>
+            </button>
+            <button class="bill-action-btn neu-flat" onclick="printBill()">
+              <span>🖨️</span>
+              <span>प्रिंट</span>
+            </button>
+            <button
+              class="bill-action-btn neu-flat"
+              onclick="shareBillWhatsApp()"
+            >
+              <span>💬</span>
+              <span>शेयर</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Continuing in Part 3... -->
+        <!-- ========== SETTINGS PAGE ========== -->
+        <div
+          id="page-settings"
+          class="page page-settings"
+          data-page="settings"
+          style="display: none"
+        >
+          <!-- Header -->
+          <header class="app-header neu-flat">
+            <div class="header-left">
+              <h1 class="header-title">⚙️ सेटिंग्स</h1>
+            </div>
+          </header>
+
+          <!-- Main Content -->
+          <main class="page-content">
+            <!-- Profile Section -->
+            <div class="settings-section">
+              <h3 class="settings-section-title">👤 प्रोफाइल</h3>
+              <div class="settings-card neu-raised">
+                <div class="setting-item">
+                  <label class="setting-label">विक्रेता का नाम</label>
+                  <div class="setting-input-wrapper neu-pressed">
+                    <input
+                      type="text"
+                      id="settings-vendor-name"
+                      class="setting-input"
+                      placeholder="आपका नाम"
+                    />
+                  </div>
+                </div>
+                <div class="setting-item">
+                  <label class="setting-label">मोबाइल नंबर</label>
+                  <div class="setting-input-wrapper neu-pressed">
+                    <input
+                      type="tel"
+                      id="settings-vendor-mobile"
+                      class="setting-input"
+                      placeholder="9876543210"
+                      maxlength="10"
+                    />
+                  </div>
+                </div>
+                <div class="setting-item">
+                  <label class="setting-label">पता</label>
+                  <div class="setting-input-wrapper neu-pressed">
+                    <textarea
+                      id="settings-vendor-address"
+                      class="setting-textarea"
+                      rows="2"
+                      placeholder="गांव, तहसील, जिला"
+                    ></textarea>
+                  </div>
+                </div>
+                <button
+                  class="btn btn-primary btn-sm"
+                  onclick="saveProfileSettings()"
+                >
+                  <span>💾</span> सेव करें
+                </button>
+              </div>
+            </div>
+
+            <!-- Default Rates Section -->
+            <div class="settings-section">
+              <h3 class="settings-section-title">💰 डिफ़ॉल्ट दर</h3>
+              <div class="settings-card neu-raised">
+                <div class="rate-settings-grid">
+                  <div class="rate-setting-item">
+                    <div class="rate-setting-header">
+                      <span class="rate-icon">🐄</span>
+                      <span class="rate-label">गाय का दूध</span>
+                    </div>
+                    <div class="rate-setting-input neu-pressed">
+                      <span class="currency">₹</span>
+                      <input
+                        type="number"
+                        id="settings-default-cow-rate"
+                        class="rate-input"
+                        placeholder="58"
+                        step="0.5"
+                        min="0"
+                      />
+                      <span class="unit">/kg</span>
+                    </div>
+                  </div>
+                  <div class="rate-setting-item">
+                    <div class="rate-setting-header">
+                      <span class="rate-icon">🐃</span>
+                      <span class="rate-label">भैंस का दूध</span>
+                    </div>
+                    <div class="rate-setting-input neu-pressed">
+                      <span class="currency">₹</span>
+                      <input
+                        type="number"
+                        id="settings-default-buffalo-rate"
+                        class="rate-input"
+                        placeholder="72"
+                        step="0.5"
+                        min="0"
+                      />
+                      <span class="unit">/kg</span>
+                    </div>
+                  </div>
+                </div>
+                <button
+                  class="btn btn-primary btn-sm"
+                  onclick="saveRateSettings()"
+                >
+                  <span>💾</span> सेव करें
+                </button>
+              </div>
+            </div>
+
+            <!-- Language Section -->
+            <div class="settings-section">
+              <h3 class="settings-section-title">🌐 भाषा / Language</h3>
+              <div class="settings-card neu-raised">
+                <div class="language-toggle">
+                  <button
+                    class="lang-btn active"
+                    data-lang="hi"
+                    onclick="setLanguage('hi')"
+                  >
+                    <span>🇮🇳</span> हिंदी
+                  </button>
+                  <button
+                    class="lang-btn"
+                    data-lang="en"
+                    onclick="setLanguage('en')"
+                  >
+                    <span>🇬🇧</span> English
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sync Section -->
+            <div class="settings-section">
+              <h3 class="settings-section-title">🔄 सिंक स्थिति</h3>
+              <div class="settings-card neu-raised">
+                <div class="sync-status-info">
+                  <div class="sync-status-row">
+                    <span class="sync-label">आखरी सिंक:</span>
+                    <span class="sync-value" id="settings-last-sync"
+                      >कभी नहीं</span
+                    >
+                  </div>
+                  <div class="sync-status-row">
+                    <span class="sync-label">बाकी आइटम:</span>
+                    <span class="sync-value" id="settings-pending-sync">0</span>
+                  </div>
+                </div>
+                <button
+                  class="btn btn-secondary btn-block"
+                  onclick="manualSync()"
+                >
+                  <span>🔄</span>
+                  <span data-i18n="syncNow">अभी सिंक करें</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="settings-section">
+              <h3 class="settings-section-title">📱 अन्य</h3>
+              <div class="settings-links">
+                <button
+                  class="settings-link-btn neu-flat"
+                  onclick="navigate('products')"
+                >
+                  <span class="link-icon">📦</span>
+                  <span class="link-text">अतिरिक्त सामान</span>
+                  <span class="link-arrow">→</span>
+                </button>
+                <button
+                  class="settings-link-btn neu-flat"
+                  onclick="navigate('payments')"
+                >
+                  <span class="link-icon">💵</span>
+                  <span class="link-text">भुगतान</span>
+                  <span class="link-arrow">→</span>
+                </button>
+                <button
+                  class="settings-link-btn neu-flat"
+                  onclick="navigate('about')"
+                >
+                  <span class="link-icon">ℹ️</span>
+                  <span class="link-text" data-i18n="about"
+                    >ऐप के बारे में</span
+                  >
+                  <span class="link-arrow">→</span>
+                </button>
+                <button
+                  class="settings-link-btn neu-flat"
+                  onclick="navigate('tips')"
+                >
+                  <span class="link-icon">💡</span>
+                  <span class="link-text" data-i18n="tips"
+                    >टिप्स और ट्रिक्स</span
+                  >
+                  <span class="link-arrow">→</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Export & Logout -->
+            <div class="settings-section">
+              <button
+                class="btn btn-secondary btn-block neu-flat"
+                onclick="exportAllData()"
+              >
+                <span>📥</span>
+                <span>सभी डेटा डाउनलोड करें</span>
+              </button>
+              <button
+                class="btn btn-danger btn-block neu-flat"
+                onclick="confirmLogout()"
+              >
+                <span>🚪</span>
+                <span data-i18n="logout">लॉगआउट</span>
+              </button>
+            </div>
+
+            <!-- App Version -->
+            <div class="app-version">
+              <p>दूध वाला v1.0.0</p>
+              <p class="version-sub">Made with ❤️ in India</p>
+            </div>
+          </main>
+        </div>
+
+        <!-- ========== ABOUT PAGE ========== -->
+        <div
+          id="page-about"
+          class="page page-about"
+          data-page="about"
+          style="display: none"
+        >
+          <!-- Header -->
+          <header class="app-header neu-flat">
+            <div class="header-left">
+              <button class="header-btn back-btn" onclick="goBack()">
+                <span>←</span>
+              </button>
+              <h1 class="header-title" data-i18n="about">ऐप के बारे में</h1>
+            </div>
+          </header>
+
+          <!-- Main Content -->
+          <main class="page-content about-content">
+            <!-- App Logo & Info -->
+            <div class="about-hero">
+              <div class="about-logo">
+                <div class="logo-circle neu-raised">
+                  <span class="logo-emoji">
+  <img src="assest/logo header.png" alt="logo" class="logo-img">
+</span>
+
+                </div>
+              </div>
+              <h1 class="about-app-name">दूध वाला</h1>
+              <p class="about-app-subtitle">Dudh Wala</p>
+              <span class="about-version">Version 1.0.0</span>
+            </div>
+
+            <!-- Description -->
+            <div class="about-section">
+              <div class="about-card neu-raised">
+                <h3 class="about-card-title">📖 परिचय</h3>
+                <p class="about-text">
+                  दूध वाला एक सरल और शक्तिशाली ऐप है जो गांव के दूध विक्रेताओं
+                  के लिए बनाई गई है। इससे आप अपने ग्राहकों का हिसाब-किताब आसानी
+                  से रख सकते हैं।
+                </p>
+                <p class="about-text">
+                  Dudh Wala is a simple yet powerful app designed for village
+                  milk vendors to manage their daily milk collection, customer
+                  accounts, and payments efficiently.
+                </p>
+              </div>
+            </div>
+
+            <!-- Features -->
+            <div class="about-section">
+              <div class="about-card neu-raised">
+                <h3 class="about-card-title">✨ विशेषताएं</h3>
+                <ul class="features-list">
+                  <li>
+                    <span class="feature-icon">👥</span> असीमित ग्राहक जोड़ें
+                  </li>
+                  <li>
+                    <span class="feature-icon">🥛</span> सुबह-शाम दूध एंट्री
+                  </li>
+                  <li>
+                    <span class="feature-icon">🐄</span> गाय और भैंस अलग-अलग दर
+                  </li>
+                  <li>
+                    <span class="feature-icon">📊</span> दैनिक, मासिक, वार्षिक
+                    रिपोर्ट
+                  </li>
+                  <li>
+                    <span class="feature-icon">🧾</span> बिल बनाएं और शेयर करें
+                  </li>
+                  <li>
+                    <span class="feature-icon">📴</span> ऑफलाइन भी काम करता है
+                  </li>
+                  <li><span class="feature-icon">☁️</span> क्लाउड बैकअप</li>
+                  <li><span class="feature-icon">🔒</span> सुरक्षित लॉगिन</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Tutorial Video -->
+            <div class="about-section">
+              <div class="about-card neu-raised">
+                <h3 class="about-card-title">🎬 ऐप कैसे इस्तेमाल करें</h3>
+                <div class="video-container">
+                  <div
+                    class="video-placeholder neu-pressed"
+                    onclick="playTutorialVideo()"
+                  >
+                    <span class="play-icon">▶️</span>
+                    <p>ट्यूटोरियल वीडियो देखें</p>
+                  </div>
+                  <!-- Embed will be inserted by JS when clicked -->
+                  <div
+                    class="video-embed"
+                    id="tutorial-video-embed"
+                    style="display: none"
+                  >
+                    <iframe
+                      id="tutorial-iframe"
+                      width="100%"
+                      height="200"
+                      src=""
+                      frameborder="0"
+                      allow="
+                        accelerometer;
+                        autoplay;
+                        clipboard-write;
+                        encrypted-media;
+                        gyroscope;
+                        picture-in-picture;
+                      "
+                      allowfullscreen
+                    >
+                    </iframe>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Developer Card (Flip) -->
+            <div class="about-section">
+              <h3 class="section-title-center">👨‍💻 डेवलपर</h3>
+              <div class="developer-flip-card" onclick="flipDeveloperCard()">
+                <div class="flip-card-inner" id="developer-card-inner">
+                  <!-- Front -->
+                  <div class="flip-card-front neu-raised">
+                    <div class="dev-photo">
+  <img src="assest/abhishek.png" alt="Abhishek Kumar" />
+</div>
+
+                    <h4 class="dev-name">ABHISHEK KUMAR</h4>
+                    <p class="dev-title">App Developer</p>
+                    <p class="tap-hint">टैप करके और जानें →</p>
+                  </div>
+                  <!-- Back -->
+                  <div class="flip-card-back neu-raised">
+                    <p class="dev-bio">
+                      Full Stack Developer passionate about creating useful apps
+                      for rural India. 🇮🇳
+                    </p>
+                    <div class="dev-links">
+                      <a
+                        href="abhishekyadav954698@gmail.com"
+                        class="dev-link"
+                        onclick="event.stopPropagation()"
+                      >
+                        <span>📧</span> Email
+                      </a>
+                      <a
+                        href="https://www.linkedin.com/in/abhishek-kumar-954698"
+                        class="dev-link"
+                        onclick="event.stopPropagation()"
+                      >
+                        <span>💼</span> LinkedIn
+                      </a>
+                      <a
+                        href="https://instagram.com/naturelensbyabhi"
+                        class="dev-link"
+                        onclick="event.stopPropagation()"
+                      >
+                        <span>🐙</span> GitHub
+                      </a>
+                    </div>
+                    <p class="tap-hint">← वापस जाएं</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Contact & Support -->
+            <div class="about-section">
+              <div class="about-card neu-raised">
+                <h3 class="about-card-title">📞 संपर्क और सहायता</h3>
+                <p class="about-text">
+                  कोई समस्या है या सुझाव देना चाहते हैं? हमसे संपर्क करें:
+                </p>
+                <div class="contact-buttons">
+                  <a
+                    href="abhishekyadav954698@gmail.com"
+                    class="contact-btn neu-flat"
+                  >
+                    <span>📧</span> ईमेल करें
+                  </a>
+                  <a
+                    href="https://wa.me/919546983729"
+                    class="contact-btn neu-flat"
+                  >
+                    <span>💬</span> व्हाट्सएप
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Rate App -->
+            <div class="about-section">
+              <button
+                class="btn btn-primary btn-block neu-raised"
+                onclick="rateApp()"
+              >
+                <span>⭐</span>
+                <span>ऐप को रेट करें</span>
+              </button>
+            </div>
+
+            <!-- Footer -->
+            <div class="about-footer">
+              <p>© 2024 Dudh Wala</p>
+              <p>Made with ❤️ in India by Abhishek Kumar</p>
+            </div>
+          </main>
+        </div>
+
+        <!-- ========== TIPS & TRICKS PAGE ========== -->
+        <div
+          id="page-tips"
+          class="page page-tips"
+          data-page="tips"
+          style="display: none"
+        >
+          <!-- Header -->
+          <header class="app-header neu-flat">
+            <div class="header-left">
+              <button class="header-btn back-btn" onclick="goBack()">
+                <span>←</span>
+              </button>
+              <h1 class="header-title">💡 सीखें और समझें</h1>
+            </div>
+          </header>
+
+          <!-- Main Content -->
+          <main class="page-content">
+            <p class="tips-intro">
+              इन वीडियो से सीखें कि ऐप का बेहतर उपयोग कैसे करें:
+            </p>
+
+            <!-- Video Cards Grid -->
+            <div class="tips-grid" id="tips-grid">
+              <!-- Loading State -->
+              <div class="tips-loading">
+                <div class="spinner"></div>
+                <p>वीडियो लोड हो रहे हैं...</p>
+              </div>
+
+              <!-- Videos will be populated by JS -->
+            </div>
+
+            <!-- Empty State -->
+            <div class="tips-empty" id="tips-empty" style="display: none">
+              <span class="empty-icon">📹</span>
+              <p>अभी कोई वीडियो उपलब्ध नहीं है</p>
+            </div>
+          </main>
+        </div>
+      </div>
+      <!-- End Pages Container -->
+
+      <!-- ========== BOTTOM NAVIGATION ========== -->
+      <nav class="bottom-nav neu-raised" id="bottom-nav">
+        <button
+          class="nav-item active"
+          data-page="dashboard"
+          onclick="navigate('dashboard')"
+        >
+          <span class="nav-icon">🏠</span>
+          <span class="nav-label" data-i18n="home">होम</span>
+        </button>
+        <button
+          class="nav-item"
+          data-page="customers"
+          onclick="navigate('customers')"
+        >
+          <span class="nav-icon">👥</span>
+          <span class="nav-label" data-i18n="customers">ग्राहक</span>
+        </button>
+        <button
+          class="nav-item"
+          data-page="reports"
+          onclick="navigate('reports')"
+        >
+          <span class="nav-icon">📊</span>
+          <span class="nav-label" data-i18n="reports">रिपोर्ट</span>
+        </button>
+        <button
+          class="nav-item"
+          data-page="settings"
+          onclick="navigate('settings')"
+        >
+          <span class="nav-icon">☰</span>
+          <span class="nav-label">मेनू</span>
+        </button>
+      </nav>
+    </div>
+    <!-- End App Container -->
+
+    <!-- ========== MODALS ========== -->
+
+    <!-- Numpad Modal -->
+    <div class="modal" id="numpad-modal">
+      <div class="modal-overlay" onclick="closeNumpadModal()"></div>
+      <div class="modal-content numpad-modal-content neu-raised">
+        <!-- Customer Info -->
+        <div class="numpad-header">
+          <div class="numpad-customer-info">
+            <span class="numpad-customer-name" id="numpad-customer-name"
+              >ग्राहक नाम</span
+            >
+            <span class="numpad-rate" id="numpad-rate">₹72/kg</span>
+          </div>
+          <button class="numpad-close" onclick="closeNumpadModal()">✕</button>
+        </div>
+
+        <!-- Milk Type Toggle -->
+        <div class="numpad-type-toggle">
+          <button
+            class="type-btn"
+            data-type="cow"
+            onclick="setNumpadMilkType('cow')"
+          >
+            <span class="type-icon">🐄</span>
+            <span class="type-name" data-i18n="cow">गाय</span>
+          </button>
+          <button
+            class="type-btn active"
+            data-type="buffalo"
+            onclick="setNumpadMilkType('buffalo')"
+          >
+            <span class="type-icon">🐃</span>
+            <span class="type-name" data-i18n="buffalo">भैंस</span>
+          </button>
+        </div>
+
+        <!-- Display -->
+        <div class="numpad-display neu-pressed">
+          <div class="display-quantity">
+            <span class="quantity-value" id="numpad-quantity">0</span>
+            <span class="quantity-unit" data-i18n="kg">kg</span>
+          </div>
+          <div class="display-amount">
+            <span class="amount-value" id="numpad-amount">₹0</span>
+          </div>
+        </div>
+
+        <!-- Duplicate Warning -->
+        <div class="numpad-warning" id="numpad-warning" style="display: none">
+          <span class="warning-icon">⚠️</span>
+          <span class="warning-text" data-i18n="duplicateWarning"
+            >इस ग्राहक की एंट्री पहले से है</span
+          >
+        </div>
+
+        <!-- Paav Quick Buttons -->
+        <div class="paav-buttons">
+          <button class="paav-btn neu-flat" onclick="addPaav(0.25)">¼</button>
+          <button class="paav-btn neu-flat" onclick="addPaav(0.5)">½</button>
+          <button class="paav-btn neu-flat" onclick="addPaav(0.75)">¾</button>
+          <button class="paav-btn neu-flat" onclick="addPaav(1)">1</button>
+        </div>
+
+        <!-- Number Pad -->
+        <div class="numpad-grid">
+          <button class="numpad-key neu-flat" onclick="numpadInput('1')">
+            1
+          </button>
+          <button class="numpad-key neu-flat" onclick="numpadInput('2')">
+            2
+          </button>
+          <button class="numpad-key neu-flat" onclick="numpadInput('3')">
+            3
+          </button>
+          <button class="numpad-key neu-flat" onclick="numpadInput('4')">
+            4
+          </button>
+          <button class="numpad-key neu-flat" onclick="numpadInput('5')">
+            5
+          </button>
+          <button class="numpad-key neu-flat" onclick="numpadInput('6')">
+            6
+          </button>
+          <button class="numpad-key neu-flat" onclick="numpadInput('7')">
+            7
+          </button>
+          <button class="numpad-key neu-flat" onclick="numpadInput('8')">
+            8
+          </button>
+          <button class="numpad-key neu-flat" onclick="numpadInput('9')">
+            9
+          </button>
+          <button class="numpad-key neu-flat" onclick="numpadInput('.')">
+            .
+          </button>
+          <button class="numpad-key neu-flat" onclick="numpadInput('0')">
+            0
+          </button>
+          <button
+            class="numpad-key neu-flat backspace"
+            onclick="numpadBackspace()"
+          >
+            ⌫
+          </button>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="numpad-actions">
+          <button class="btn btn-secondary" onclick="numpadClear()">
+            <span>C</span>
+            <span>साफ़ करें</span>
+          </button>
+          <button class="btn btn-primary" onclick="saveNumpadEntry()">
+            <span>💾</span>
+            <span data-i18n="saveNext">सेव और अगला</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirm Modal -->
+    <div class="modal" id="confirm-modal">
+      <div class="modal-overlay" onclick="closeConfirmModal()"></div>
+      <div class="modal-content confirm-modal-content neu-raised">
+        <div class="confirm-icon" id="confirm-icon">⚠️</div>
+        <h3 class="confirm-title" id="confirm-title">पुष्टि करें</h3>
+        <p class="confirm-message" id="confirm-message">
+          क्या आप वाकई ऐसा करना चाहते हैं?
+        </p>
+        <div class="confirm-actions">
+          <button class="btn btn-secondary" onclick="closeConfirmModal()">
+            <span data-i18n="no">नहीं</span>
+          </button>
+          <button
+            class="btn btn-danger"
+            id="confirm-yes-btn"
+            onclick="confirmAction()"
+          >
+            <span data-i18n="yes">हाँ</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Product Modal -->
+    <div class="modal" id="product-modal">
+      <div class="modal-overlay" onclick="closeProductModal()"></div>
+      <div class="modal-content form-modal-content neu-raised">
+        <div class="modal-header">
+          <h3 class="modal-title">📦 सामान जोड़ें</h3>
+          <button class="modal-close" onclick="closeProductModal()">✕</button>
+        </div>
+        <form id="product-form" onsubmit="saveProduct(event)">
+          <input type="hidden" id="product-id" />
+          <input type="hidden" id="product-customer-id" />
+
+          <div class="form-group">
+            <label class="form-label">ग्राहक</label>
+            <div class="select-wrapper neu-pressed">
+              <select id="product-customer-select" class="form-select" required>
+                <option value="">ग्राहक चुनें</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">तारीख</label>
+            <div class="input-wrapper neu-pressed">
+              <input
+                type="date"
+                id="product-date"
+                class="form-input"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">सामान</label>
+            <div class="quick-items">
+              <button
+                type="button"
+                class="quick-item-btn neu-flat"
+                onclick="setProductItem('खल्ली')"
+              >
+                खल्ली
+              </button>
+              <button
+                type="button"
+                class="quick-item-btn neu-flat"
+                onclick="setProductItem('चोकर')"
+              >
+                चोकर
+              </button>
+              <button
+                type="button"
+                class="quick-item-btn neu-flat"
+                onclick="setProductItem('भूसा')"
+              >
+                भूसा
+              </button>
+              <button
+                type="button"
+                class="quick-item-btn neu-flat"
+                onclick="setProductItem('दवाई')"
+              >
+                दवाई
+              </button>
+              <button
+                type="button"
+                class="quick-item-btn neu-flat"
+                onclick="setProductItem('अन्य')"
+              >
+                अन्य
+              </button>
+            </div>
+            <div class="input-wrapper neu-pressed">
+              <input
+                type="text"
+                id="product-item-name"
+                class="form-input"
+                placeholder="सामान का नाम"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group half">
+              <label class="form-label">मात्रा</label>
+              <div class="input-wrapper neu-pressed">
+                <input
+                  type="text"
+                  id="product-quantity"
+                  class="form-input"
+                  placeholder="जैसे: 1 बोरी"
+                />
+              </div>
+            </div>
+            <div class="form-group half">
+              <label class="form-label">राशि (₹)</label>
+              <div class="input-wrapper neu-pressed">
+                <input
+                  type="number"
+                  id="product-amount"
+                  class="form-input"
+                  placeholder="0"
+                  min="0"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">नोट (वैकल्पिक)</label>
+            <div class="input-wrapper neu-pressed">
+              <input
+                type="text"
+                id="product-note"
+                class="form-input"
+                placeholder="कोई नोट..."
+              />
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              onclick="closeProductModal()"
+            >
+              <span data-i18n="cancel">रद्द करें</span>
+            </button>
+            <button type="submit" class="btn btn-primary">
+              <span>💾</span>
+              <span data-i18n="save">सेव करें</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Add Payment Modal -->
+    <div class="modal" id="payment-modal">
+      <div class="modal-overlay" onclick="closePaymentModal()"></div>
+      <div class="modal-content form-modal-content neu-raised">
+        <div class="modal-header">
+          <h3 class="modal-title">💵 भुगतान जोड़ें</h3>
+          <button class="modal-close" onclick="closePaymentModal()">✕</button>
+        </div>
+        <form id="payment-form" onsubmit="savePayment(event)">
+          <input type="hidden" id="payment-id" />
+          <input type="hidden" id="payment-customer-id" />
+
+          <div class="form-group">
+            <label class="form-label">ग्राहक</label>
+            <div class="select-wrapper neu-pressed">
+              <select
+                id="payment-customer-select"
+                class="form-select"
+                required
+                onchange="onPaymentCustomerChange()"
+              >
+                <option value="">ग्राहक चुनें</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Customer Due Display -->
+          <div
+            class="customer-due-display neu-flat"
+            id="payment-customer-due"
+            style="display: none"
+          >
+            <span class="due-label">बकाया राशि:</span>
+            <span class="due-value" id="payment-due-amount">₹0</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">तारीख</label>
+            <div class="input-wrapper neu-pressed">
+              <input
+                type="date"
+                id="payment-date"
+                class="form-input"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">राशि (₹)</label>
+            <div class="quick-amounts">
+              <button
+                type="button"
+                class="quick-amount-btn neu-flat"
+                id="full-due-btn"
+                onclick="setFullDue()"
+              >
+                पूरा बकाया
+              </button>
+              <button
+                type="button"
+                class="quick-amount-btn neu-flat"
+                onclick="setPaymentAmount(1000)"
+              >
+                ₹1000
+              </button>
+              <button
+                type="button"
+                class="quick-amount-btn neu-flat"
+                onclick="setPaymentAmount(5000)"
+              >
+                ₹5000
+              </button>
+            </div>
+            <div class="input-wrapper neu-pressed">
+              <span class="input-prefix">₹</span>
+              <input
+                type="number"
+                id="payment-amount"
+                class="form-input"
+                placeholder="0"
+                min="0"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">माध्यम</label>
+            <div class="payment-mode-toggle">
+              <button
+                type="button"
+                class="mode-btn active"
+                data-mode="cash"
+                onclick="setPaymentMode('cash')"
+              >
+                <span>💵</span>
+                <span data-i18n="cash">नकद</span>
+              </button>
+              <button
+                type="button"
+                class="mode-btn"
+                data-mode="upi"
+                onclick="setPaymentMode('upi')"
+              >
+                <span>📱</span>
+                <span data-i18n="upi">UPI</span>
+              </button>
+              <button
+                type="button"
+                class="mode-btn"
+                data-mode="bank"
+                onclick="setPaymentMode('bank')"
+              >
+                <span>🏦</span>
+                <span data-i18n="bank">बैंक</span>
+              </button>
+            </div>
+            <input type="hidden" id="payment-mode" value="cash" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">नोट (वैकल्पिक)</label>
+            <div class="input-wrapper neu-pressed">
+              <input
+                type="text"
+                id="payment-note"
+                class="form-input"
+                placeholder="कोई नोट..."
+              />
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              onclick="closePaymentModal()"
+            >
+              <span data-i18n="cancel">रद्द करें</span>
+            </button>
+            <button type="submit" class="btn btn-primary">
+              <span>💾</span>
+              <span data-i18n="save">सेव करें</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Sort Options Modal -->
+    <div class="modal" id="sort-modal">
+      <div class="modal-overlay" onclick="closeSortModal()"></div>
+      <div class="modal-content sort-modal-content neu-raised">
+        <div class="modal-header">
+          <h3 class="modal-title">⇅ क्रम बदलें</h3>
+          <button class="modal-close" onclick="closeSortModal()">✕</button>
+        </div>
+        <div class="sort-options">
+          <button
+            class="sort-option-btn neu-flat active"
+            data-sort="name"
+            onclick="setSortOption('name')"
+          >
+            <span>🔤</span> नाम A-Z
+          </button>
+          <button
+            class="sort-option-btn neu-flat"
+            data-sort="name-desc"
+            onclick="setSortOption('name-desc')"
+          >
+            <span>🔤</span> नाम Z-A
+          </button>
+          <button
+            class="sort-option-btn neu-flat"
+            data-sort="due-high"
+            onclick="setSortOption('due-high')"
+          >
+            <span>💰</span> सबसे ज्यादा बकाया
+          </button>
+          <button
+            class="sort-option-btn neu-flat"
+            data-sort="recent"
+            onclick="setSortOption('recent')"
+          >
+            <span>🕐</span> हाल में जोड़े गए
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Video Player Modal -->
+    <div class="modal" id="video-modal">
+      <div class="modal-overlay" onclick="closeVideoModal()"></div>
+      <div class="modal-content video-modal-content">
+        <button class="video-close-btn" onclick="closeVideoModal()">✕</button>
+        <div class="video-player-container">
+          <iframe
+            id="video-player-iframe"
+            width="100%"
+            height="100%"
+            src=""
+            frameborder="0"
+            allow="
+              accelerometer;
+              autoplay;
+              clipboard-write;
+              encrypted-media;
+              gyroscope;
+              picture-in-picture;
+            "
+            allowfullscreen
+          >
+          </iframe>
+        </div>
+        <div class="video-info">
+          <h4 class="video-title" id="video-modal-title">--</h4>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== TOAST NOTIFICATION ========== -->
+    <div class="toast-container" id="toast-container">
+      <!-- Toasts will be added here by JS -->
+    </div>
+
+    <!-- ========== LOADING OVERLAY ========== -->
+    <div class="loading-overlay" id="loading-overlay" style="display: none">
+      <div class="loading-content">
+        <div class="loading-spinner"></div>
+        <p class="loading-text" id="loading-text" data-i18n="loading">
+          लोड हो रहा है...
+        </p>
+      </div>
+    </div>
+    <script>
+      // Register Service Worker
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/sw.js")
+            .then((reg) => console.log("SW registered:", reg.scope))
+            .catch((err) => console.log("SW registration failed:", err));
+        });
+      }
+    </script>
+    <!-- ========== FIREBASE SDK ========== -->
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <!-- Firebase Auth -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+
+    <!-- ========== MAIN SCRIPT ========== -->
+    <script src="script.js"></script>
+  </body>
+</html>

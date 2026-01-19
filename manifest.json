@@ -1,0 +1,35 @@
+{
+  "name": "Dudh Wala - दूध वाला",
+  "short_name": "DudhWala",
+  "description": "Village milk vendor management app",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#4A90A4",
+  "background_color": "#E4EfE9",
+  "categories": ["business", "productivity"],
+  "lang": "hi",
+  "icons": [
+    {
+      "src": "assest/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assest/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Quick Entry",
+      "short_name": "Entry",
+      "url": "/index.html?page=quick-entry",
+      "icons": [{"src": "icon-192.png", "sizes": "192x192"}]
+    }
+  ]
+}
